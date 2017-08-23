@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/vue.js"></script>
+    <script src="/jquery-3.2.1.js"></script>
+  </head>
+  <body>
+      <input type="button" value="获取" id="btn" />
+      <div id="box">
+          <div v-for="page,index in list">
+            <p style="font-size:50px;background:red;">第{{index+1}}页</p>
+              <ul>
+                  <li  v-for="item in page">
+                      <span>未回答：{{item.unanswer}}</span>
+                      <span>作者：{{item.answers}}</span>
+                    <p>
+                        <a :href="item.url">{{item.title}}</a>
+                    </p>
+                  </li>
+                </ul>
+          </div>
+          
+      </div>
+      <script>
+        btn.onclick = function () {
+          $.ajax({
+            url:'/miaovdata',
+            data:{
+              pages:5
+            },
+            success(data){
+              console.table(data);
+              datas.list = data;
+            }
+          })
+        }
+        let datas = {
+          list:[]
+        };
+        new Vue({
+          el: '#box',
+          data:datas
+        })
+
+      </script>
+  </body>
+</html>
