@@ -4,6 +4,7 @@ mongoose.Promise = require('bluebird');
 
 urlDataSchema.add({
   allotName:String,  // 分配对应的人
+  flagAnswer:Boolean,
   pageIndex: Number,
   page: String,
   url: {

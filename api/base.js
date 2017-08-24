@@ -41,5 +41,15 @@ router.get("/allot", (req,res) => {
 	});
 });
 
+// 标记为已回答或未回答
+/* router.get("/flag", (req,res) => {
+	let {shareUser,id} = req.query;
+	// 通过id更新
+	let a = urlDataModel.findByIdAndUpdate(id,{flagAnswer:shareUser});
+	a.then((data) =>{
+		res.send('ok');
+	});
+}); */
+
 module.exports = router;
 
