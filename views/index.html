@@ -16,6 +16,7 @@
                   <li  v-for="item in page">
                       <span>未回答：{{item.unanswer}}</span>
                       <span>作者：{{item.answers}}</span>
+                      <input type="button" value="分配" id="share" />
                     <p>
                         <a :href="item.url">{{item.title}}</a>
                     </p>
@@ -29,7 +30,7 @@
           $.ajax({
             url:'/miaovdata',
             data:{
-              pages:5
+              pages:1
             },
             success(data){
               console.table(data);
@@ -43,6 +44,11 @@
         new Vue({
           el: '#box',
           data:datas
+        });
+
+        // 分配
+        $("#share").click(() => {
+            
         })
 
       </script>
