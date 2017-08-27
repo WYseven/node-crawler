@@ -11,7 +11,10 @@ let urlDataSchema = new mongoose.Schema;
  */
 
 urlDataSchema.add({
-  allotName:String,  // 分配对应的人
+  allotId:{
+    type:String,
+    default:''
+  },  // 分配对应的人
   flagAnswer:{
     type: String,
     default:'unAnswer'

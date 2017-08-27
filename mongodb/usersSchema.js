@@ -13,6 +13,18 @@ var UsersDataModel = mongoose.model('users', usersDataSchema);
 
 let usersObj = new UsersDataModel();
 
+/*UsersDataModel.insertMany([
+  {
+    userName :'王允'
+  },{
+    userName :'智鹏'
+  },{
+    userName :'多多'
+  },{
+    userName :'成龙'
+  }
+])*/
+
 module.exports = {
   usersObj
 };
