@@ -5,7 +5,8 @@ var promise = mongoose.connect('mongodb://localhost:27017/miaovbbs', {
   useMongoClient: true
 });
 promise.then(function(db) {
-  console.log('数据库连接成功')
+  console.log('数据库连接成功');
+  global.db = db;
 })
 .catch((error)=>{
   console.log('连接失败')

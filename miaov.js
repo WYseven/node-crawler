@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 
 // 引入接口文件
-const apiRouter = require('./api/base.js');
+const apiRouter = require('./api/urlAPi.js');
+const testRouter = require('./api/base.js');
 
 // 连接数据库
 require('./mongodb/connet.js');
@@ -14,6 +15,7 @@ app.get("/", (req,res) => {
 });
 
 app.use('/api',apiRouter);
+app.use('/test',testRouter);
 
 app.listen(8888);
 

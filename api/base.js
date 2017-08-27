@@ -23,10 +23,10 @@ router.get("/miaovdata", (req,res) => {
 	getDataByMultiPages(urls)
 	.then((data)=>{
 		// 存在数据库中
+		// 给每一种数据标记为未回答
 		urlObj.modelSave(data)
 		.then(()=>{
-			console.log('保存成功')
-			res.send(data.reverse());
+			res.send(data);
 		})
 	})
 });

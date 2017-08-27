@@ -1,19 +1,30 @@
 const mongoose = require('mongoose');
 let urlDataSchema = new mongoose.Schema;
-mongoose.Promise = require('bluebird');
+// mongoose.Promise = require('bluebird');
+
+/**
+ * 参数说明：
+ * flagAnswer：
+ *    未回答  unAnswer   默认
+ *    分配了未回答  allotNoAnswer
+ *    回答了 answerDone
+ */
 
 urlDataSchema.add({
   allotName:String,  // 分配对应的人
-  flagAnswer:Boolean,
-  pageIndex: Number,
-  page: String,
-  url: {
+  flagAnswer:{
+    type: String,
+    default:'unAnswer'
+  },// 标记问题是否回答
+  pageIndex: Number, // 正页的第几条
+  page: String,      // 第几页
+  url: {            // url地址
     type: String,
     unique: true
   },
-  title: String,
-  unanswer: Number,
-  answers: Array
+  title: String,    // 标题
+  unanswer: Number,  // 未回答数
+  answers: Array     // 回答人数
 });
 // 创建url的实例
 var urlDataModel = mongoose.model('url', urlDataSchema);
