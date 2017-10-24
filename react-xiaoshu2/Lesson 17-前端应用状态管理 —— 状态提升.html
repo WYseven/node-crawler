@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="GNvdsbNFPS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+      <title>前端应用状态管理 —— 状态提升 | React.js 小书</title>
+      <meta name="keywords" content="React.js,React.js 小书,状态管理,组件,教程" />
+      <meta name="description" content="React.js 小书是一个开源、免费、专业、简单的 React.js 教程。React.js 并没有提供好的解决方案来管理组件之间的共享状态，本文介绍状态管理，状态提升的方法。" />
+    
+
+    
+
+    <link rel="icon" href="https://huzidaha.github.io/static/assets/img/favicon.ico">
+    <link rel="stylesheet"
+href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="/books/react/assets/css/main.css">
+</head>
+
+<body>
+
+    <div class='float-wechat' id='float-wechat'>
+    	<img src='https://huzidaha.github.io/static/assets/img/wechat-user.jpeg' />
+      <p>加入《React.js 小书》读者交流群，一起讨论、交流、学习前端技术。</p>
+    </div>
+    <div class="wrapper" id='wrapper'>
+      <style media="screen">
+@media (max-width: 1335px) and (min-width: 900px) {
+	.wrapper {
+		margin-left: 329px;
+	}
+}
+@media (max-width: 900px) {
+	#table-of-content {
+		margin-left: -350px;
+	}
+}
+</style>
+<h1 style='position: relative; top: -15px;'>React.js 小书</h1>
+
+<link ref='prefetch' href="/books/react/lesson18" />
+
+
+<nav class='table-of-content' id='table-of-content'>
+	<a href='/books/react'>&lt;-- 首页</a>
+	<h3>第一阶段</h3>
+  
+  
+		<a  href="/books/react/lesson1" title="React.js 简介">1. React.js 简介</a>
+  
+  
+  
+		<a  href="/books/react/lesson2" title="前端组件化（一）：从一个简单的例子讲起">2. 前端组件化（一）：从一个简单的例子讲起</a>
+  
+  
+  
+		<a  href="/books/react/lesson3" title="前端组件化（二）：优化 DOM 操作">3. 前端组件化（二）：优化 DOM 操作</a>
+  
+  
+  
+		<a  href="/books/react/lesson4" title="前端组件化（三）：抽象出公共组件类">4. 前端组件化（三）：抽象出公共组件类</a>
+  
+  
+  
+		<a  href="/books/react/lesson5" title="React.js 基本环境安装">5. React.js 基本环境安装</a>
+  
+  
+  
+		<a  href="/books/react/lesson6" title="使用 JSX 描述 UI 信息">6. 使用 JSX 描述 UI 信息</a>
+  
+  
+  
+		<a  href="/books/rea,ct/lesson7" title="组件的 render 方法">7. 组件的 render 方法</a>
+  
+  
+  
+		<a  href="/books/react/lesson8" title="组件的组合、嵌套和组件树">8. 组件的组合、嵌套和组件树</a>
+  
+  
+  
+		<a  href="/books/react/lesson9" title="事件监听">9. 事件监听</a>
+  
+  
+  
+		<a  href="/books/react/lesson10" title="组件的 state 和 setState">10. 组件的 state 和 setState</a>
+  
+  
+  
+		<a  href="/books/react/lesson11" title="配置组件的 props">11. 配置组件的 props</a>
+  
+  
+  
+		<a  href="/books/react/lesson12" title="state vs props">12. state vs props</a>
+  
+  
+  
+		<a  href="/books/react/lesson13" title="渲染列表数据">13. 渲染列表数据</a>
+  
+  
+  
+		<a  href="/books/react/lesson14" title="实战分析：评论功能（一）">14. 实战分析：评论功能（一）</a>
+  
+  
+  
+		<a  href="/books/react/lesson15" title="实战分析：评论功能（二）">15. 实战分析：评论功能（二）</a>
+  
+  
+  
+		<a  href="/books/react/lesson16" title="实战分析：评论功能（三）">16. 实战分析：评论功能（三）</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	<h3>第二阶段</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+		<a  class='active'  href="/books/react/lesson17" title="前端应用状态管理 —— 状态提升">17. 前端应用状态管理 —— 状态提升</a>
+  
+  
+  
+		<a  href="/books/react/lesson18" title="挂载阶段的组件生命周期（一）">18. 挂载阶段的组件生命周期（一）</a>
+  
+  
+  
+		<a  href="/books/react/lesson19" title="挂载阶段的组件生命周期（二）">19. 挂载阶段的组件生命周期（二）</a>
+  
+  
+  
+		<a  href="/books/react/lesson20" title="更新阶段的组件生命周期">20. 更新阶段的组件生命周期</a>
+  
+  
+  
+		<a  href="/books/react/lesson21" title="ref 和 React.js 中的 DOM 操作">21. ref 和 React.js 中的 DOM 操作</a>
+  
+  
+  
+		<a  href="/books/react/lesson22" title="props.children 和容器类组件">22. props.children 和容器类组件</a>
+  
+  
+  
+		<a  href="/books/react/lesson23" title="dangerouslySetHTML 和 style 属性">23. dangerouslySetHTML 和 style 属性</a>
+  
+  
+  
+		<a  href="/books/react/lesson24" title="PropTypes 和组件参数验证">24. PropTypes 和组件参数验证</a>
+  
+  
+  
+		<a  href="/books/react/lesson25" title="实战分析：评论功能（四）">25. 实战分析：评论功能（四）</a>
+  
+  
+  
+		<a  href="/books/react/lesson26" title="实战分析：评论功能（五）">26. 实战分析：评论功能（五）</a>
+  
+  
+  
+		<a  href="/books/react/lesson27" title="实战分析：评论功能（六）">27. 实战分析：评论功能（六）</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	<h3>第三阶段</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+		<a  href="/books/react/lesson28" title="高阶组件（Higher-Order Components）">28. 高阶组件（Higher-Order Components）</a>
+  
+  
+  
+		<a  href="/books/react/lesson29" title="React.js 的 context">29. React.js 的 context</a>
+  
+  
+  
+		<a  href="/books/react/lesson30" title="动手实现 Redux（一）：优雅地修改共享状态">30. 动手实现 Redux（一）：优雅地修改共享状态</a>
+  
+  
+  
+		<a  href="/books/react/lesson31" title="动手实现 Redux（二）：抽离 store 和监控数据变化">31. 动手实现 Redux（二）：抽离 store 和监控数据变化</a>
+  
+  
+  
+		<a  href="/books/react/lesson32" title="动手实现 Redux（三）：纯函数（Pure Function）简介">32. 动手实现 Redux（三）：纯函数（Pure Function）简介</a>
+  
+  
+  
+		<a  href="/books/react/lesson33" title="动手实现 Redux（四）：共享结构的对象提高性能">33. 动手实现 Redux（四）：共享结构的对象提高性能</a>
+  
+  
+  
+		<a  href="/books/react/lesson34" title="动手实现 Redux（五）：不要问为什么的 reducer">34. 动手实现 Redux（五）：不要问为什么的 reducer</a>
+  
+  
+  
+		<a  href="/books/react/lesson35" title="动手实现 Redux（六）：Redux 总结">35. 动手实现 Redux（六）：Redux 总结</a>
+  
+  
+  
+		<a  href="/books/react/lesson36" title="动手实现 React-redux（一）：初始化工程">36. 动手实现 React-redux（一）：初始化工程</a>
+  
+  
+  
+		<a  href="/books/react/lesson37" title="动手实现 React-redux（二）：结合 context 和 store">37. 动手实现 React-redux（二）：结合 context 和 store</a>
+  
+  
+  
+		<a  href="/books/react/lesson38" title="动手实现 React-redux（三）：connect 和 mapStateToProps">38. 动手实现 React-redux（三）：connect 和 mapStateToProps</a>
+  
+  
+  
+		<a  href="/books/react/lesson39" title="动手实现 React-redux（四）：mapDispatchToProps">39. 动手实现 React-redux（四）：mapDispatchToProps</a>
+  
+  
+  
+		<a  href="/books/react/lesson40" title="动手实现 React-redux（五）：Provider">40. 动手实现 React-redux（五）：Provider</a>
+  
+  
+  
+		<a  href="/books/react/lesson41" title="动手实现 React-redux（六）：React-redux 总结">41. 动手实现 React-redux（六）：React-redux 总结</a>
+  
+  
+  
+		<a  href="/books/react/lesson42" title=",使用真正的 Redux 和 React-redux">42. 使用真正的 Redux 和 React-redux</a>
+  
+  
+  
+		<a  href="/books/react/lesson43" title="Smart 组件 vs Dumb 组件">43. Smart 组件 vs Dumb 组件</a>
+  
+  
+  
+		<a  href="/books/react/lesson44" title="实战分析：评论功能（七）">44. 实战分析：评论功能（七）</a>
+  
+  
+  
+		<a  href="/books/react/lesson45" title="实战分析：评论功能（八）">45. 实战分析：评论功能（八）</a>
+  
+  
+  
+		<a  href="/books/react/lesson46" title="实战分析：评论功能（九）">46. 实战分析：评论功能（九）</a>
+  
+  
+</nav>
+<div id="mask-template">
+	<div></div>
+</div>
+<style>
+	#granted-modal {
+		display: none;
+		position: fixed;
+		margin: auto;
+		left: 100px;
+		top: 0;
+		bottom: 100px;
+		right: 0;
+		width: 500px;
+		height: 300px;
+		background: #fff;
+		z-index: 100;
+		border-radius: 5px;
+	}
+	#try-to-buy {
+		display: none;
+	}
+	.error-message {
+    position: absolute;
+    bottom: 7px;
+    right: -30px;
+    font-size: 12px;
+    color: rgb(211, 53, 62);
+  }
+	.field {
+		position: relative;
+		margin-top: 25px;
+	}
+	.modal-head {
+		font-size: 20px;
+    text-align: center;
+    margin-top: 30px;
+	}
+	.granted-footer {
+		text-align: center;
+	}
+	#back-to-input {
+		font-size: 12px;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+	}
+	.hover {
+		cursor: pointer;
+	}
+	.granted-footer {
+		position: absolute;
+    margin: auto;
+		padding-top: 15px;
+    left: 30px;
+    right: 30px;
+    bottom: 20px;
+		border-top: 1px solid #eee;
+	}
+	#buy-now {
+		color: #00a854;
+	}
+	.field label {
+		display: inline-block;
+		width: 90px;
+		text-align: right;
+	}
+	.field label::after {
+		content: "："
+	}
+	.granted-form {
+		width: 80%;
+		margin: 0 auto;
+		margin-top: 25px;
+	}
+	.submit {
+		display: inline-block;
+		float: right;
+	}
+	.button {
+		background: #f7f7f7;
+		border: 1px solid #ccc;
+		padding: 5px 20px;
+		border-radius: 3px;
+		outline: none;
+	}
+	.button:hover {
+		background: #fff;
+	}
+	.field input {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #e0dbdb;
+    width: 166px;
+	}
+</style>
+<div id="granted-modal">
+	<div style="padding: 10px;">
+		<div id="readcode-input-area">
+			<h2 class="modal-head">阅读第三阶段，请输入你的阅读码 </h2>
+			<form class="granted-form" id="read-code-form">
+				<div class="field">
+					<label>Email</label>
+					<input type="email" id="email">
+				</div>
+				<div class="field">
+					<label>阅读码</label>
+					<input type="text" id="read-code">
+				</div>
+				<button id="check-granted" class="button hover submit">确认</button>
+			</form>
+			<div class="granted-footer">
+				还没有阅读码？<b>¥10</b> 元即可阅读所有章节
+				<p style="margin-top: 10px;"><a class="hover" id="buy-now">马上获取阅读码</a></p>
+			</div>
+		</div>
+		<div id="try-to-buy">
+			<div id="back-to-input" class="hover">&lt;&lt; 返回</div>
+			<h2 class="modal-head">输入你的邮箱，系统会给你发送邮件</h2>
+			<form class="granted-form" id="get-read-code-form">
+				<div class="field">
+					<label>Email</label>
+					<input type="email" id="reader-email">
+				</div>
+				<button id="alipay" style="margin-top: 20px;" class="hover submit button">获取阅读码</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="/books/react/assets/js/jquery-3.2.1.min.js"></script>
+<script src="/books/react/assets/js/pay.min.js"></script>
+<script type="text/javascript">
+var tableOfContent = document.getElementById('table-of-content')
+var timer = null
+function resetTableOfContent (rect) {
+  scrollTop = localStorage.getItem('scrollTop') * 1
+  scrollTop = scrollTop || 0
+  tableOfContent.scrollTop = scrollTop
+}
+tableOfContent.addEventListener('scroll', function (event) {
+  clearTimeout(timer)
+  timer = setTimeout(function() {
+    localStorage.setItem('scrollTop', tableOfContent.scrollTop)
+  }, 50)
+}, false)
+resetTableOfContent()
+</script>
+<div class="post">
+	<div class="post__back">
+  	<a href="/books/react">&lt;-- 返回首页</a>
+    <div class="post__title">
+    	<h1>前端应用状态管理 —— 状态提升</h1>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content"?>
+      <ul style="font-size: 14px; margin-top: -10px;">
+  <li>
+    作者：<a href="https://www.zhihu.com/people/hu-zi-da-ha" target="_blank">胡子大哈</a>
+  </li>
+  <li>
+    原文链接：<a href="http://huziketang.com/books/react/lesson17"> http://huziketang.com/books/react/lesson17 </a>
+  </li>
+  <li>转载请注明出处，保留原文链接和作者信息。</li>
+</ul>
+
+<p>上一个评论功能的案例中，可能会有些同学会对一个地方感到疑惑： <code>CommentList</code> 中显示的评论列表数据为什么要通过父组件 <code>CommentApp</code> 用 <code>props</code> 传进来？为什么不直接存放在 <code>CommentList</code> 的 <code>state</code> 当中？例如这样做也是可以的：</p>
+
+<pre><code class="language-javascript">class CommentList extends Component {
+  constructor () {
+    this.state = { comments: [] }
+  }
+
+  addComment (comment) {
+    this.state.comments.push(comment)
+    this.setState({
+      comments: this.state.comments
+    })
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        {this.state.comments.map((comment, i) =&gt;
+          &lt;Comment comment={comment} key={i} /&gt;
+        )}
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre>
+
+<p>如果把这个 <code>comments</code> 放到 <code>CommentList</code> 当中，<em>当有别的组件也依赖这个 <code>comments</code> 数据或者有别的组件会影响这个数据</em>�,�那么就带来问题了。举一个数据依赖的例子：例如，现在我们有另外一个和 <code>CommentList</code> 同级的 <code>CommentList2</code> ，也是需要显示同样的评论列表数据。</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/85B8A2B7-288F-4FC2-A0AB-C4E153BB3854.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/85B8A2B7-288F-4FC2-A0AB-C4E153BB3854.png" alt="React.js 小书实战之状态管理图片" /></a></p>
+
+<p><code>CommentList2</code> 和 <code>CommentList</code> 并列为 <code>CommentApp</code> 的子组件，它也需要依赖 <code>comments</code> 显示评论列表。但是因为 <code>comments</code> 数据在 <code>CommentList</code> 中，它没办法访问到。</p>
+
+<p>遇到这种情况，我们<em>将这种组件之间共享的状态交给组件最近的公共父节点保管</em>，然后通过 <code>props</code> 把状态传递给子组件，这样就可以在组件之间共享数据了。</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/C547BD3E-F923-4B1D-96BC-A77966CDFBEF.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/C547BD3E-F923-4B1D-96BC-A77966CDFBEF.png" alt="React.js 小书实战之状态管理图片" /></a></p>
+
+<p>在我们的例子当中，如果把 <code>comments</code> 交给父组件 <code>CommentApp</code> �,�那么 <code>CommentList</code> 和 <code>CommentList2</code> 都可以通过 <code>props</code> 获取到 <code>comments</code>，React.js 把这种行为叫做“状态提升”。</p>
+
+<p>但是这个 <code>CommentList2</code> 是我们临时加上去的，在实际案例当中并没有涉及到这种组件之间依赖 <code>comments</code> 的情况，为什么还需要把 <code>comments</code> 提升到 <code>CommentApp</code>？那是因为有个组件会影响到 <code>comments</code> ，那就是 <code>CommentInput</code>。<code>CommentInput</code> 产生的新的评论数据是会插入 <code>comments</code> 当中的，所以我们遇到这种情况也会把状态提升到父组件。</p>
+
+<p>总结一下：当某个状态被多个组件<em>依赖</em>或者<em>影响</em>的时候，就把该状态提升到这些组件的最近公共父组件中去管理，用 <code>props</code> 传递<em>数据或者函数</em>来管理这种<em>依赖</em>或着<em>影响</em>的行为。</p>
+
+<p>我们来看看状态提升更多的例子，假设现在我们的父组件 <code>CommentApp</code> 只是属于更大的组件树 <code>PostApp</code> 的一部分：</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/5.007.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/5.007.png" alt="React.js 小书实战之状态管理图片" /></a></,p>
+
+<p>而这个更大的组件树的另外的子树的 <code>CommentsCount</code> 组件也需要依赖 <code>comments</code> 来显示评论数，那我们就只能把 <code>comments</code> 继续提升到这些依赖组件的最近公共父组件 <code>PostApp</code> 当中。</p>
+
+<p>现在继续让我们的例子极端起来。假设现在 <code>PostApp</code> 只是另外一个更大的父组件 <code>Index</code> 的子树。而 <code>Index</code> 的某个子树的有一个按钮组件可以一键清空所有 <code>comments</code>（也就是说，这个按钮组件可以影响到这个数据），我们只能继续 <code>commenets</code> 提升到 <code>Index</code> 当中。</p>
+
+<p>你会发现这种无限制的提升不是一个好的解决方案。一旦发生了提升，你就需要修改原来保存这个状态的组件的代码，也要把整个数据传递路径经过的组件都修改一遍，好让数据能够一层层地传递下去。这样对代码的组织管理维护带来很大的问题。到这里你可以抽象一下问题：</p>
+
+<blockquote>
+  <p>如何更好的管理这种被多个组件所依赖或影响的状态？</p>
+</blockquote>
+
+<p>你可以看到 React.js 并没有提供好的解决方案来管理这种组件之间的共享状态。在实际项目当中状态提升并不是一个好的解决方案，所以我们后续会引入 Redux 这样�,��状态管理工具来帮助我们来管理这种共享状态，但是在讲解到 Redux 之前，我们暂时采取状态提升的方式来进行管理。</p>
+
+<p>对于不会被多个组件依赖和影响的状态（例如某种下拉菜单的展开和收起状态），一般来说只需要保存在组件内部即可，不需要做提升或者特殊的管理。</p>
+
+<h2 id="课后练习">课后练习</h2>
+<ul>
+  <li><a target="_blank" href="http://scriptoj.com/problems/9">百分比换算器</a></li>
+</ul>
+
+<hr />
+
+<blockquote>
+  <p>因为第三方评论工具有问题，对本章节有任何疑问的朋友可以移步到 <a target="_blank" href="http://scriptoj.com/category/4/react-js-小书交流区">React.js 小书的论坛</a> 发帖，我会回答大家的疑问。</p>
+</blockquote>
+
+    </div>
+		<br/>
+		<hr />
+		<br />
+		<div class="PageNavigation">
+			
+			<p>
+				<a class="next" href="/books/react/lesson18">下一节：挂载阶段的组件生命周期（一）</a>
+			</p>
+			
+			<br/>
+			
+			<p>
+				<a class="prev" href="/books/react/lesson16">上一节：实战分析：评论功能（三）</a>
+			</p>
+			
+		</div>
+		<!-- <a class="ad" href="https://aonaotu.com" target="_blank"> -->
+			<!-- <div class="ad-logo">
+				<img src="/books/react/assets/img/ad-logo.svg">
+				<p class="ad-title">凹脑图</p>
+			</div>
+			<p class="ad-wording">迄今为止最简单好用的在线思维导图工具</p>
+			<span class="ad-indicator">广告</span>
+			<img src="/books/react/assets/img/ad-bg-2.svg" class="ad-bg-2">
+		</a> -->
+		<!-- <div class='share-block margin-top-gap'>
+			<p>如果你觉得小书写得还不错，可以请胡子大哈喝杯茶 :)</p>
+			<button class='donate-button' id='donate-button' type="button">赞赏</button>
+		</div> -->
+		<div class='share-block margin-bottom-gap'>
+			<p>传播一下知识也是一个很好的选择</p>
+			<div class="share-block-inner">
+				<div class="jiathis_style_24x24">
+					<a class="jiathis_button_qzone"></a>
+					<a class="jiathis_button_tsina"></a>
+					<a class="jiathis_button_tqq"></a>
+					<a class="jiathis_button_weixin"></a>
+					<a class="jiathis_button_renren"></a>
+					<a href="http://www.jiathis.com/share?uid=2127727" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+				</div>
+				<script type="text/javascript">
+				var jiathis_config = {data_track_clickback:'true'};
+				</script>
+				<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2127727" charset="utf-8"></script>
+			</div>
+		</div>
+		<!-- UY BEGIN -->
+		<div id="uyan_frame"></div>
+		<script type="text/javascript">
+		var paths = window.location.pathname.split('/')
+		var lessonName = paths[paths.length - 1]
+		var uyan_config = {
+			// 'url': 'http://react.huziketang.com/blog/' + lessonName,
+			',du': 'react.huziketang.com'
+		}
+		</script>
+		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2127727"></script>
+		<!-- UY END -->
+		<!--wechat donate-->
+		<div class='donate-mask' id='donate-mask'>
+			<img src='https://huzidaha.github.io/static/assets/img/wechat-pay.png' id='wechat-pay' />
+		</div>
+		<script type="text/javascript">
+			// var donateMask = document.getElementById('donate-mask')
+			// var donateButton = document.getElementById('donate-button')
+			// var wechatPay = document.getElementById('wechat-pay')
+			// donateButton.addEventListener('click', function () {
+			// 	donateMask.style.display = 'flex'
+			// }, false)
+			// donateMask.addEventListener('click', function () {
+			// 	donateMask.style.display = 'none'
+			// }, false)
+			// wechatPay.addEventListener('click', function (event) {
+			// 	event.stopPropagation()
+			// }, false)
+		</script>
+	</div>
+
+    </div>
+    <script src="/books/react/assets/js/highlight.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      if (window.location.origin.match(/localhost/)) return
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f08b5240ef2d1692572ce0f7756b325e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      var bp = document.createElement('script');
+      // push baidu.com
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+    var wrapper = document.getElementById('wrapper')
+    var floatWechat = document.getElementById('float-wechat')
+
+    function resetAll (event) {
+      var rect = wrapper.getBoundingClientRect()
+      resetFloatWechat(rect)
+    }
+    function resetFloatWechat(rect) {
+      var left = rect.left + rect.width
+      floatWechat.style.left = left + 'px'
+      floatWechat.style.display = 'block'
+    }
+    window.addEventListener('resize', resetAll)
+    resetAll()
+    </script>
+
+</body>
+
+</html>
+<link rel="stylesheet" href="http://huziketang.com/books/react/assets/css/main.css">

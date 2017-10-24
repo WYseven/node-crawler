@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="GNvdsbNFPS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+      <title>React.js 基本环境安装 | React.js 小书</title>
+      <meta name="keywords" content="React.js,React.js 小书,安装,教程,React.js 下载" />
+      <meta name="description" content="React.js 小书是一个开源、免费、专业、简单的 React.js 教程。React.js 单独使用基本上是不可能的事情，需要配合一些第三方工具，本文是教你如何下载和安装 React.js 的教程。" />
+    
+
+    
+
+    <link rel="icon" href="https://huzidaha.github.io/static/assets/img/favicon.ico">
+    <link rel="stylesheet"
+href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="/books/react/assets/css/main.css">
+</head>
+
+<body>
+
+    <div class='float-wechat' id='float-wechat'>
+    	<img src='https://huzidaha.github.io/static/assets/img/wechat-user.jpeg' />
+      <p>加入《React.js 小书》读者交流群，一起讨论、交流、学习前端技术。</p>
+    </div>
+    <div class="wrapper" id='wrapper'>
+      <style media="screen">
+@media (max-width: 1335px) and (min-width: 900px) {
+	.wrapper {
+		margin-left: 329px;
+	}
+}
+@media (max-width: 900px) {
+	#table-of-content {
+		margin-left: -350px;
+	}
+}
+</style>
+<h1 style='position: relative; top: -15px;'>React.js 小书</h1>
+
+<link ref='prefetch' href="/books/react/lesson6" />
+
+
+<nav class='table-of-content' id='table-of-content'>
+	<a href='/books/react'>&lt;-- 首页</a>
+	<h3>第一阶段</h3>
+  
+  
+		<a  href="/books/react/lesson1" title="React.js 简介">1. React.js 简介</a>
+  
+  
+  
+		<a  href="/books/react/lesson2" title="前端组件化（一）：从一个简单的例子讲起">2. 前端组件化（一）：从一个简单的例子讲起</a>
+  
+  
+  
+		<a  href="/books/react/lesson3" title="前端组件化（二）：优化 DOM 操作">3. 前端组件化（二）：优化 DOM 操作</a>
+  
+  
+  
+		<a  href="/books/react/lesson4" title="前端组件化（三）：抽象出公共组件类">4. 前端组件化（三）：抽象出公共组件类</a>
+  
+  
+  
+		<a  class='active'  href="/books/react/lesson5" title="React.js 基本环境安装">5. React.js 基本环境安装</a>
+  
+  
+  
+		<a  href="/books/react/lesson6" title="使用 JSX 描述 UI 信息">6. 使用 JSX 描述 UI 信息</a>
+  
+  
+  
+		<a  href="/books/react/lesson7" title="组件的 render 方法">7. 组件的 render 方法</a>
+  
+  
+  
+		<a  href="/books/react/lesson8" title="组件的组合、嵌套和组件树">8. 组件的组合、嵌套和组件树</a>
+  
+  
+  
+		<a  href="/books/react/lesson9" title="事件监听">9. 事件监听</a>
+  
+  
+  
+		<a  href="/books/react/lesson10" title="组件的 state 和 setState">10. 组件的 state 和 setState</a>
+  
+  
+  
+		<a  href="/books/react/lesson11" title="配置组件的 props">11. 配置组件的 props</a>
+  
+  
+  
+		<a  href="/books/react/lesson12" title="state vs props">12. state vs props</a>
+  
+  
+  
+		<a  href="/books/react/lesson13" title="渲染列表数据">13. 渲染列表数据</a>
+  
+  
+  
+		<a  href="/books/react/lesson14" title="实战分析：评论功能（一）">14. 实战分析：评论功能（一）</a>
+  
+  
+  
+		<a  href="/books/react/lesson15" title="实战分析：评论功能（二）">15. 实战分析：评论功能（二）</a>
+  
+  
+  
+		<a  href="/books/react/lesson16" title="实战分析：评论功能（三）">16. 实战分析：评论功能（三）</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	<h3>第二阶段</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  ,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+		<a  href="/books/react/lesson17" title="前端应用状态管理 —— 状态提升">17. 前端应用状态管理 —— 状态提升</a>
+  
+  
+  
+		<a  href="/books/react/lesson18" title="挂载阶段的组件生命周期（一）">18. 挂载阶段的组件生命周期（一）</a>
+  
+  
+  
+		<a  href="/books/react/lesson19" title="挂载阶段的组件生命周期（二）">19. 挂载阶段的组件生命周期（二）</a>
+  
+  
+  
+		<a  href="/books/react/lesson20" title="更新阶段的组件生命周期">20. 更新阶段的组件生命周期</a>
+  
+  
+  
+		<a  href="/books/react/lesson21" title="ref 和 React.js 中的 DOM 操作">21. ref 和 React.js 中的 DOM 操作</a>
+  
+  
+  
+		<a  href="/books/react/lesson22" title="props.children 和容器类组件">22. props.children 和容器类组件</a>
+  
+  
+  
+		<a  href="/books/react/lesson23" title="dangerouslySetHTML 和 style 属性">23. dangerouslySetHTML 和 style 属性</a>
+  
+  
+  
+		<a  href="/books/react/lesson24" title="PropTypes 和组件参数验证">24. PropTypes 和组件参数验证</a>
+  
+  
+  
+		<a  href="/books/react/lesson25" title="实战分析：评论功能（四）">25. 实战分析：评论功能（四）</a>
+  
+  
+  
+		<a  href="/books/react/lesson26" title="实战分析：评论功能（五）">26. 实战分析：评论功能（五）</a>
+  
+  
+  
+		<a  href="/books/react/lesson27" title="实战分析：评论功能（六）">27. 实战分析：评论功能（六）</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	<h3>第三阶段</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+		<a  href="/books/react/lesson28" title="高阶组件（Higher-Order Components）">28. 高阶组件（Higher-Order Components）</a>
+  
+  
+  
+		<a  href="/books/react/lesson29" title="React.js 的 context">29. React.js 的 context</a>
+  
+  
+  
+		<a  href="/books/react/lesson30" title="动手实现 Redux（一）：优雅地修改共享状态">30. 动手实现 Redux（一）：优雅地修改共享状态</a>
+  
+  
+  
+		<a  href="/books/react/lesson31" title="动手实现 Redux（二）：抽离 store 和监控数据变化">31. 动手实现 Redux（二）：抽离 store 和监控数据变化</a>
+  
+  
+  
+		<a  href="/books/react/lesson32" title="动手实现 Redux（三）：纯函数（Pure Function）简介">32. 动手实现 Redux（三）：纯函数（Pure Function）简介</a>
+  
+  
+  
+		<a  href="/books/react/lesson33" title="动手实现 Redux（四）：共享结构的对象提高性能">33. 动手实现 Redux（四）：共享结构的对象提高性能</a>
+  
+  
+  
+		<a  href="/books/react/lesson34" title="动手实现 Redux（五）：不要问为什么的 reducer">34. 动手实现 Redux（五）：不要问为什么的 reducer</a>
+  
+  
+  
+		<a  href="/books/react/lesson35" title="动手实现 Redux（六）：Redux 总结">35. 动手实现 Redux（六）：Redux 总结</a>
+  
+  
+  
+		<a  href="/books/react/lesson36" title="动手实现 React-redux（一）：初始化工程">36. 动手实现 React-redux（一）：初始化工程</a>
+  
+  
+  
+		<a  href="/books/react/lesson37" title="动手实现 React-redux（二）：结合 context 和 store">37. 动手实现 React-redux（二）：结合 context 和 store</a>
+  
+  
+  
+		<a  href="/books/react/lesson38" title="动手实现 React-redux（三）：connect 和 mapStateToProps">38. 动手实现 React-redux（三）：connect 和 mapStateToProps</a>
+  
+  
+  
+		<a  href="/books/react/lesson39" title="动手实现 React-redux（四）：mapDispatchToProps">39. 动手实现 React-redux（四）：mapDispatchToProps</a>
+  
+  
+  
+		<a  href="/books/react/lesson40" title="动手实现 React-redux（五）：Provider">40. 动手实现 React-redux（五）：Provider</a>
+  
+  
+  
+		<a  href="/books/react/lesson41" title="动手实现 React-redux（六）：React-redux 总结">41. 动手实现 React-redux（六）：React-redux 总结</a>
+  
+  
+  
+		<a  href="/books/react/lesson42" title="使用真正的 Redux 和 React-redux">42. 使用真正的 Redux 和 React-redux</a>
+  
+  
+  
+		<a  href="/books/react/lesson43" title="Smart 组件 vs Dumb 组件">43. Smart 组件 vs Dumb 组件</a>
+  
+  
+  
+		<a  href="/books/react/lesson44" title="实战分析：评论功能（七）">44. 实战分析：评论功能（七）</a>
+  
+  
+  
+		<a  href="/books/react/lesson45" title="实战分析：评论功能（八）">45. 实战分析：评论功能（八）</a>
+  
+  
+  
+		<a  href="/books/react/lesson46" title="实战分析：评论功能（九）">46. 实战分析：评论功能（九）</a>
+  
+  
+</nav>
+<div id="mask-template">
+	<div></div>
+</div>
+<style>
+	#granted-modal {
+		display: none;
+		position: fixed;
+		margin: auto;
+		left: 100px;
+		top: 0;
+		bottom: 100px;
+		right: 0;
+		width: 500px;
+		height: 300px;
+		background: #fff;
+		z-index: 100;
+		border-radius: 5px;
+	}
+	#try-to-buy {
+		display: none;
+	}
+	.error-message {
+    position: absolute;
+    bottom: 7px;
+    right: -30px;
+    font-size: 12px;
+    color: rgb(211, 53, 62);
+  }
+	.field {
+		position: relative;
+		margin-top: 25px;
+	}
+	.modal-head {
+		font-size: 20px;
+    text-align: center;
+    margin-top: 30px;
+	}
+	.granted-footer {
+		text-align: center;
+	}
+	#back-to-input {
+		font-size: 12px;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+	}
+	.hover {
+		cursor: pointer;
+	}
+	.granted-footer {
+		position: absolute;
+    margin: auto;
+		padding-top: 15px;
+    left: 30px;
+    right: 30px;
+    bottom: 20px;
+		border-top: 1px solid #eee;
+	}
+	#buy-now {
+		color: #00a854;
+	}
+	.field label {
+		display: inline-block;
+		width: 90px;
+		text-align: right;
+	}
+	.field label::after {
+		content: "："
+	}
+	.granted-form {
+		width: 80%;
+		margin: 0 auto;
+		margin-top: 25px;
+	}
+	.submit {
+		display: inline-block;
+		float: right;
+	}
+	.button {
+		background: #f7f7f7;
+		border: 1px solid #ccc;
+		padding: 5px 20px;
+		border-radius: 3px;
+		outline: none;
+	}
+	.button:hover {
+		background: #fff;
+	}
+	.field input {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #e0dbdb;
+    width: 166px;
+	}
+</style>
+<div id="granted-modal">
+	<div style="padding: 10px;">
+		<div id="readcode-input-area">
+			<h2 class="modal-head">阅读第三阶段，请输入你的阅读码 </h2>
+			<form class="granted-form" id="read-code-form">
+				<div class="field">
+					<label>Email</label>
+					<input type="email" id="email">
+				</div>
+				<div class="field">
+					<label>阅读码</label>
+					<input type="text" id="read-code">
+				</div>
+				<button id="check-granted" class="button hover submit">确认</button>
+			</form>
+			<div class="granted-footer">
+				还没有阅读码？<b>¥10</b> 元即可阅读所有章节
+				<p style="margin-top: 10px;"><a class="hover" id="buy-now">马上获取阅读码</a></p>
+			</div>
+		</div>
+		<div id="try-to-buy">
+			<div id="back-to-input" class="hover">&lt;&lt; 返回</div>
+			<h2 class="modal-head">输入你的邮箱，系统会给你发送邮件</h2>
+			<form class="granted-form" id="get-read-code-form">
+				<div class="field">
+					<label>Email</label>
+					<input type="email" id="reader-email">
+				</div>
+				<button id="alipay" style="margin-top: 20px;" class="hover submit button">获取阅读码</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="/books/react/assets/js/jquery-3.2.1.min.js"></script>
+<script src="/books/react/assets/js/pay.min.js"></script>
+<script type="text/javascript">
+var tableOfContent = document.getElementById('table-of-content')
+var timer = null
+function resetTableOfContent (rect) {
+  scrollTop = localStorage.getItem('scrollTop') * 1
+  scrollTop = scrollTop || 0
+  tableOfContent.scrollTop = scrollTop
+}
+tableOfContent.addEventListener('scroll', function (event) {
+  clearTimeout(timer)
+  timer = setTimeout(function() {
+    localStorage.setItem('scrollTop', tableOfContent.scrollTop)
+  }, 50)
+}, false)
+resetTableOfContent()
+</script>
+<div class="post">
+	<div class="post__back">
+  	<a href="/books/react">&lt;-- 返回首页</a>
+    <div class="post__title">
+    	<h1>React.js 基本环境安装</h1>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content"?>
+      <ul style="font-size: ,14px; margin-top: -10px;">
+  <li>
+    作者：<a href="https://www.zhihu.com/people/hu-zi-da-ha" target="_blank">胡子大哈</a>
+  </li>
+  <li>
+    原文链接：<a href="http://huziketang.com/books/react/lesson5"> http://huziketang.com/books/react/lesson5 </a>
+  </li>
+  <li>转载请注明出处，保留原文链接和作者信息。</li>
+</ul>
+
+<h2 id="安装-reactjs">安装 React.js</h2>
+<p>React.js 单独使用基本上是不可能的事情。不要指望着类似于 jQuery 下载放到 <code>&lt;head /&gt;</code> 标签就开始使用。使用 React.js 不管在开发阶段生产阶段都需要一堆工具和库辅助，编译阶段你需要借助 Babel；需要 Redux 等第三方的状态管理工具来组织代码；如果你要写单页面应用那么你需要 React-router。这就是所谓的“React.js全家桶”。</p>
+
+<p>本课程不会教大家如何配置这些东西，因为这不是课程的重点，网上有很多的资料，大家可以去参考那些资料。我们这里会直接使用 React.js 官网所推荐使用的工具 <code>create-react-app</code> 工具。它可以帮助我们一键生成所需要的工程目录，并帮我们做好各种配置和依赖，也帮我们隐藏了这些配置的细节。也就是所谓的“开箱即用”。</p>
+
+<p>工具地址：<a href="https://github.com/facebookincubator/create-react-app">https://github.com/fac,ebookincubator/create-react-app</a></p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/C9754D1A-0989-49B2-AC9F-B8D9717198CB.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/C9754D1A-0989-49B2-AC9F-B8D9717198CB.png" alt="React.js 安装教程图片" /></a></p>
+
+<p>在安装之前要确认你的机器上安装了 node.js 环境包括 npm。如果没有安装的同学可以到 node.js 的官网下载自己电脑的对应的安装包来安装好环境。</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/70B2D77C-1656-4D9E-B57E-671BE1D568AD.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/70B2D77C-1656-4D9E-B57E-671BE1D568AD.png" alt="React.js 安装教程图片" /></a></p>
+
+<p>安装好环境以后，只需要按照官网的指引安装 <code>create-react-app</code> 即可。</p>
+
+<pre><code>npm install -g create-react-app
+</code></pre>
+
+<p>这条命令会往我们的机器上安装一条叫 <code>create-react-app</code> 的命令，安装好以后就可以直接使用它来构建一个 react 的前端工程：</p>
+
+<pre><code>create-react-app hello-react
+</code></pre>
+
+<p>这条命令会帮我们构建一个叫 <code>hello-react</code> 的工程，并且会自动地帮助我们安装所需要的依赖，现在只需要安静地等待它安装完。</p>
+
+<blockquote>
+  <p>额外的小贴士：</p>
+
+  <p>如果有些同学安装过程比较慢，那是很有可能是因为 npm 下载的时候是从国外的源下载的缘故。所以可以把 npm 的源改成国内的 taobao 的源，这样会加速下载过程。在执行上面的命令之前可以先修改一下 npm 的源：</p>
+
+  <p><code>npm config set registry https://registry.npm.taobao.org</code></p>
+</blockquote>
+
+<p>下载完以后我们就可以启动工程了，进入工程目录然后通过 npm 启动工程：</p>
+
+<pre><code>cd hello-react
+npm start
+</code></pre>
+
+<p>终端提示成功：</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/A25CB842-11DE-4DC7-A805-85AEF2A64163.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/A25CB842-11DE-4DC7-A805-85AEF2A64163.png" alt="React.js 安装教程图片" /></a></p>
+
+<p>并且会自动打开浏览器，就可以看到 React 的工程顺利运行的效果：</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/React_App.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/React_App.png" alt="React.js 安装教程图片" /></a></p>
+
+<p>这时候我们把 <code>src/App.js</code> 文件中的 <code>&lt;h2&gt;</code> 标签的内容修改为 <code>Hello React</code>，</p>
+
+<pre><code class="language-html">&lt;h2&gt;Hello React&lt;/h2&gt;
+</code></pre>
+
+<p>保存一下，然后户就会发现浏览器自动刷新，并且我们的修改也生效了：</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/3FDC1B75-AACD-40A4-9101-1AF8C57EFBF4.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/3FDC1B75-AACD-40A4-9101-1AF8C57EFBF4.png" alt="React.js 安装教程图片" /></a></p>
+
+<p>到这里我们的环境已经安装好了，并且顺利地运行了我们第一个例子。接下来我们会探讨 React.js 的组件的基本写法。</p>
+
+<hr />
+
+<blockquote>
+  <p>因为第三方评论工具有问题，对本章节有任何疑问的朋友可以移步到 <a target="_blank" href="http://scriptoj.com/category/4/react-js-小书交流区">React.js 小书的论坛</a> 发帖，我会回答大家的疑问。</p>
+</blockquote>
+
+    </div>
+		<br/>
+		<hr />
+		<br />
+		<div class="PageNavigation">
+			
+			<p>
+				<a class="next" href="/books/react/lesson6">下一节：使用 JSX 描述 UI 信息</a>
+			</p>
+			
+			<br/>
+			
+			<p>
+				<a class="prev" href="/books/react/lesson4">上一节：前端组件化（三）：抽象出公共组件类</a>
+			</p>
+			
+		</div>
+		<!-- <a class="ad" href="https://aonaotu.com" target="_blank"> -->
+			<!-- <div class="ad-logo">
+				<img src="/books/react/assets/img/ad-logo.svg">
+				<p class="ad-title">凹脑图</p>
+			</div>
+			<p class="ad-wording">迄今为止最简单好用的在线思维导图工具</p>
+			<span class="ad-indicator">广告</span>
+			<img src="/books/react/assets/img/ad-bg-2.svg" class="ad-bg-2">
+		</a> -->
+		<!-- <div class='share-block margin-top-gap'>
+			<p>如果你觉得小书写得还不错，可以请胡子大哈喝杯茶 :)</p>
+			<button class='donate-button' id='donate-button' type="button">赞赏</button>
+		</div> -->
+		<div class='share-block margin-bottom-gap'>
+			<p>传播一下知识也是一个很好的选择</p>
+			<div class="share-block-inner">
+				<div class="jiathis_style_24x24">
+					<a class="jiathis_button_qzone"></a>
+					<a class="jiathis_button_tsina"></a>
+					<a class="jiathis_button_tqq"></a>
+					<a class="jiathis_button_weixin"></a>
+					<a class="jiathis_button_renren"></a>
+					<a href="http://www.jiathis.com/share?uid=2127727" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+				</div>
+				<script type="text/javascript">
+				var jiathis_config = {data_track_clickback:'true'};
+				</script>
+				<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2127727" charset="utf-8"></script>
+			</div>
+		</div>
+		<!-- UY BEGIN -->
+		<div id="uyan_frame"></div>
+		<script type="text/javascript">
+		var paths = window.location.pathname.split('/')
+		var lessonName = paths[paths.length - 1]
+		var uyan_config = {
+			// 'url': 'http://react.huziketang.com/blog/' + lessonName,
+			'du': 'react.huziketang.com'
+		}
+		</script>
+		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2127727"></script>
+		<!-- UY END -->
+		<!--wechat donate-->
+		<div class='donate-mask' id='donate-mask'>
+			<img src='https://huzidaha.github.io/static/assets/img/wechat-pay.png' id='wechat-pay' />
+		</div>
+		<script type="text/javascript">
+			// var donateMask = document.getElementById('donate-mask')
+			// var donateButton = document.getElementById('donate-button')
+			// var wechatPay = document.getElementById('wechat-pay')
+			// donateButton.addEventListener('click', function () {
+			// 	donateMask.style.display = 'flex'
+			// }, false)
+			// donateMask.addEventListener('click', function () {
+			// 	donateMask.style.display = 'none'
+			// }, false)
+			// wechatPay.addEventListener('click', function (event) {
+			// 	event.stopPropagation()
+			// }, false)
+		</script>
+	</div>
+
+    </div>
+    <script src="/books/react/assets/js/highlight.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      if (window.location.origin.match(/localhost/)) return
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f08b5240ef2d1692572ce0f7756b325e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      var bp = document.createElement('script');
+      // push baidu.com
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+    var wrapper = document.getElementById('wrapper')
+    var floatWechat = document.getElementById('float-wechat')
+
+    function resetAll (event) {
+      var rect = wrapper.getBoundingClientRect()
+      resetFloatWechat(rect)
+    }
+    function resetFloatWechat(rect) {
+      var left = rect.left + rect.width
+      floatWechat.style.left = left + 'px'
+      floatWechat.style.display = 'block'
+    }
+    window.addEventListener('resize', resetAll)
+    resetAll()
+    </script>
+
+</body>
+
+</html>
+<link rel="stylesheet" href="http://huziketang.com/books/react/assets/css/main.css">

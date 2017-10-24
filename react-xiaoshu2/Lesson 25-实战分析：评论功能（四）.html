@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="GNvdsbNFPS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+      <title>实战分析：评论功能（四） | React.js 小书</title>
+      <meta name="keywords" content="React.js,React.js 小书,组件,实战,评论功能" />
+      <meta name="description" content="React.js 小书是一个开源、免费、专业、简单的 React.js 教程。本文带大家一起来学习如何分析、编写评论功能，包括：自动聚焦到评论框、持久化用户名等。本文是评论功能的第四部分。" />
+    
+
+    
+
+    <link rel="icon" href="https://huzidaha.github.io/static/assets/img/favicon.ico">
+    <link rel="stylesheet"
+href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="/books/react/assets/css/main.css">
+</head>
+
+<body>
+
+    <div class='float-wechat' id='float-wechat'>
+    	<img src='https://huzidaha.github.io/static/assets/img/wechat-user.jpeg' />
+    ,  <p>加入《React.js 小书》读者交流群，一起讨论、交流、学习前端技术。</p>
+    </div>
+    <div class="wrapper" id='wrapper'>
+      <style media="screen">
+@media (max-width: 1335px) and (min-width: 900px) {
+	.wrapper {
+		margin-left: 329px;
+	}
+}
+@media (max-width: 900px) {
+	#table-of-content {
+		margin-left: -350px;
+	}
+}
+</style>
+<h1 style='position: relative; top: -15px;'>React.js 小书</h1>
+
+<link ref='prefetch' href="/books/react/lesson26" />
+
+
+<nav class='table-of-content' id='table-of-content'>
+	<a href='/books/react'>&lt;-- 首页</a>
+	<h3>第一阶段</h3>
+  
+  
+		<a  href="/books/react/lesson1" title="React.js 简介">1. React.js 简介</a>
+  
+  
+  
+		<a  href="/books/react/lesson2" title="前端组件化（一）：从一个简单的例子讲起">2. 前端组件化（一）：从一个简单的例子讲起</a>
+  
+  
+  
+		<a  href="/books/react/lesson3" title="前端组件化（二）：优化 DOM 操作">3. 前端组件化（二）：优化 DOM 操作</a>
+  
+  
+  
+		<a  href="/books/react/lesson4" title="前端组件化（三）：抽象出公共组件类">4. 前端组件化（三）：抽象出公共组件类</a>
+  
+  
+  
+		<a  href="/books/react/lesson5" title="React.js 基本环境安装">5. React.js 基本环境安装</a>
+  
+  
+  
+		<a  href="/books/react/lesson6" title="使用 JSX 描述 UI 信息">6. 使用 JSX 描述 UI 信息</a>
+  
+  
+,  
+		<a  href="/books/react/lesson7" title="组件的 render 方法">7. 组件的 render 方法</a>
+  
+  
+  
+		<a  href="/books/react/lesson8" title="组件的组合、嵌套和组件树">8. 组件的组合、嵌套和组件树</a>
+  
+  
+  
+		<a  href="/books/react/lesson9" title="事件监听">9. 事件监听</a>
+  
+  
+  
+		<a  href="/books/react/lesson10" title="组件的 state 和 setState">10. 组件的 state 和 setState</a>
+  
+  
+  
+		<a  href="/books/react/lesson11" title="配置组件的 props">11. 配置组件的 props</a>
+  
+  
+  
+		<a  href="/books/react/lesson12" title="state vs props">12. state vs props</a>
+  
+  
+  
+		<a  href="/books/react/lesson13" title="渲染列表数据">13. 渲染列表数据</a>
+  
+  
+  
+		<a  href="/books/react/lesson14" title="实战分析：评论功能（一）">14. 实战分析：评论功能（一）</a>
+  
+  
+  
+		<a  href="/books/react/lesson15" title="实战分析：评论功能（二）">15. 实战分析：评论功能（二）</a>
+  
+  
+  
+		<a  href="/books/react/lesson16" title="实战分析：评论功能（三）">16. 实战分析：评论功能（三）</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	<h3>第二阶段</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+		<a  href="/books/react/lesson17" title="前端应用状态管理 —— 状态提升">17. 前端应用状态管理 —— 状态提升</a>
+  
+  
+  
+		<a  href="/books/react/lesson18" title="挂载阶段的组件生命周期（一）">18. 挂载阶段的组件生命周期（一）</a>
+  
+  
+  
+		<a  href="/books/react/lesson19" title="挂载阶段的组件生命周期（二）">19. 挂载阶段的组件生命周期（二）</a>
+  
+  
+  
+		<a  href="/books/react/lesson20" title="更新阶段的组件生命周期">20. 更新阶段的组件生命周期</a>
+  
+  
+  
+		<a  href="/books/react/lesson21" title="ref 和 React.js 中的 DOM 操作">21. ref 和 React.js 中的 DOM 操作</a>
+  
+  
+  
+		<a  href="/books/react/lesson22" title="props.children 和容器类组件">22. props.children 和容器类组件</a>
+  
+  
+  
+		<a  href="/books/react/lesson23" title="dangerouslySetHTML 和 style 属性">23. dangerouslySetHTML 和 style 属性</a>
+  
+  
+  
+		<a  href="/books/react/lesson24" title="PropTypes 和组件参数验证">24. PropTypes 和组件参数验证</a>
+  
+  
+  
+		<a  class='active'  href="/books/react/lesson25" title="实战分析：评论功能（四）">25. 实战分析：评论功能（四）</a>
+  
+  
+  
+		<a  href="/books/react/lesson26" title="实战分析：评论功能（五）">26. 实战分析：评论功能（五）</a>
+  ,
+  
+  
+		<a  href="/books/react/lesson27" title="实战分析：评论功能（六）">27. 实战分析：评论功能（六）</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	<h3>第三阶段</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+		<a  href="/books/react/lesson28" title="高阶组件（Higher-Order Components）">28. 高阶组件（Higher-Order Components）</a>
+  
+  
+  
+		<a  href="/books/react/lesson29" title="React.js 的 context">29. React.js 的 context</a>
+  
+  
+  
+		<a  href="/books/react/lesson30" title="动手实现 Redux（一）：优雅地修改共享状态">30. 动手实现 Redux（一）：优雅地修改共享状态</a>
+  
+  
+  
+		<a  href="/books/react/lesson31" title="动手实现 Redux（二）：抽离 store 和监控数据变化">31. 动手实现 Redux（二）：抽离 store 和监控数据变化</a>
+  
+  
+  
+		<a  href="/books/react/lesson32" title="动手实现 Redux（三）：纯函数（Pure Function）简介">32. 动手实现 Redux（三）：纯函数（Pure Function）简介</a>
+  
+  
+  
+		<a  href="/books/react/lesson33" title="动手实现 Redux（四）：共享结构的对象提高性能">33. 动手实现 Redux（四）：共享结构的对象提高性能</a>
+  
+  
+  
+		<a  href="/books/react/lesson34" title="动手实现 Redux（五）：不要问为什么的 reducer">34. 动手实现 Redux（五）：不要问为什么的 reducer</a>
+  
+  
+  
+		<a  href="/books/react/lesson35" title="动手实现 Redux（六）：Redux 总结">35. 动手实现 Redux（六）：Redux 总结</a>
+  
+  
+  
+		<a  href="/books/react/lesson36" title="动手实现 React-redux（一）：初始化工程">36. 动手实现 React-redux（一）：初始化工程</a>
+  
+  
+  
+		<a  href="/books/react/lesson37" title="动手实现 React-redux（二）：结合 context 和 store">37. 动手实现 React-redux（二）：结合 context 和 store</a>
+  
+  
+  
+		<a  href="/books/react/lesson38" title="动手实现 React-redux（三）：connect 和 mapStateToProps">38. 动手实现 React-redux（三）：connect 和 mapStateToProps</a>
+  
+  
+  
+		<a  href="/books/react/lesson39" title="动手实现 React-redux（四）：mapDispatchToProps">39. 动手实现 React-redux（四）：mapDispatchToProps</a>
+  
+  
+  
+		<a  href="/books/react/lesson40" title="动手实现 React-redux（五）：Provider">40. 动手实现 React-redux（五）：Provider</a>
+  
+  
+  
+		<a  href="/books/react/lesson41" title="动手实现 React-redux（六）：React-redux 总结">41. 动手实现 React-redux（六）：React-redux 总结</a>
+  
+  
+  
+		<a  href="/books/react/lesson42" title="使用真正的 Redux 和 React-redux">42. 使用真正的 Redux 和 React-redux</a>
+  
+  
+  
+		<a  href="/books/react/lesson43" title="Smart 组件 vs Dumb 组件">43. Smart 组件 vs Dumb 组件</a>
+  
+  
+  
+		<a  href="/books/react/lesson44" title="实战分析：评论功能（七）">44. 实战分析：评论功能（七）</a>
+  
+  
+  
+		<a  href="/books/react/lesson45" title="实战分析：评论功能（八）">45. 实战分析：评论功能（八）</a>
+  
+  
+  
+		<a  href="/books/react/lesson46" title="实战分析：评论功能（九）">46. 实战分析：评论功能（九）</a>
+  
+  
+</nav>
+<div id="mask-template">
+	<div></div>
+</div>
+<style>
+	#granted-modal {
+		display: none;
+		position: fixed;
+		margin: auto;
+		left: 100px;
+		top: 0;
+		bottom: 100px;
+		right: 0;
+		width: 500px;
+		height: 300px;
+		background: #fff;
+		z-index: 100;
+		border-radius: 5px;
+	}
+	#try-to-buy {
+		display: none;
+	}
+	.error-message {
+    position: absolute;
+    bottom: 7px;
+    right: -30px;
+    font-size: 12px;
+    color: rgb(211, 53, 62);
+  }
+	.field {
+		position: relative;
+		margin-top: 25px;
+	}
+	.modal-head {
+		font-size: 20px;
+    text-align: center;
+    margin-top: 30px;
+	}
+	.granted-footer {
+		text-align: center;
+	}
+	#back-to-input {
+		font-size: 12px;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+	}
+	.hover {
+		cursor: pointer;
+	}
+	.granted-foo,ter {
+		position: absolute;
+    margin: auto;
+		padding-top: 15px;
+    left: 30px;
+    right: 30px;
+    bottom: 20px;
+		border-top: 1px solid #eee;
+	}
+	#buy-now {
+		color: #00a854;
+	}
+	.field label {
+		display: inline-block;
+		width: 90px;
+		text-align: right;
+	}
+	.field label::after {
+		content: "："
+	}
+	.granted-form {
+		width: 80%;
+		margin: 0 auto;
+		margin-top: 25px;
+	}
+	.submit {
+		display: inline-block;
+		float: right;
+	}
+	.button {
+		background: #f7f7f7;
+		border: 1px solid #ccc;
+		padding: 5px 20px;
+		border-radius: 3px;
+		outline: none;
+	}
+	.button:hover {
+		background: #fff;
+	}
+	.field input {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #e0dbdb;
+    width: 166px;
+	}
+</style>
+<div id="granted-modal">
+	<div style="padding: 10px;">
+		<div id="readcode-input-area">
+			<h2 class="modal-head">阅读第三阶段，请输入你的阅读码 </h2>
+			<form class="granted-form" id="read-code-form">
+				<div class="field">
+					<label>Email</label>
+					<input type="email" id="email">
+				</div>
+				<div class="field">
+					<label>阅读码</label>
+					<input type="text" id="read-code">
+				</div>
+				<button id="check-granted" class="button hover submit">确认</button>
+			</form>
+			<div class="granted-footer">
+				还没有阅读码？<b>¥10</b> 元即可阅读所有章节
+				<p style="margin-top: 10px;"><a class="hover" id="buy-now">马上获取阅读码</a></p>
+			</div>
+		</div>
+		<div id="try-to-buy">
+			<div id="back-to-input" class="hover">&lt;&lt; 返回</div>
+			<h2 class="modal-head">输入你的邮箱，系统会给你发送邮件</h2>
+			<form class="granted-form" id="get-read-code-form">
+				<div class="field">
+					<label>Email</label>
+					<input type="email" id="reader-email">
+				</div>
+				<button id="alipay" style="margin-top: 20px;" class="hover submit button">获取阅读码</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="/books/react/assets/js/jquery-3.2.1.min.js"></script>
+<script src="/books/react/assets/js/pay.min.js"></script>
+<script type="text/javascript">
+var tableOfContent = document.getElementById('table-of-content')
+var timer = null
+function resetTableOfContent (rect) {
+  scrollTop = localStorage.getItem('scrollTop') * 1
+  scrollTop = scrollTop || 0
+  tableOfContent.scrollTop = scrollTop
+}
+tableOfContent.addEventListener('scroll', function (event) {
+  clearTimeout(timer)
+  timer = setTimeout(function() {
+    localStorage.setItem('scrollTop', tableOfContent.scrollTop)
+  }, 50)
+}, false)
+resetTableOfContent()
+</script>
+<div class="post">
+	<div class="post__back">
+  	<a href="/books/react">&lt;-- 返回首页</a>
+    <div class="post__title">
+    	<h1>实战分析：评论功能（四）</h1>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content"?>
+      <ul style="font-size: 14px; margin-top: -10px;">
+  <li>
+    作者：<a href="https://www.zhihu.com/people/hu-zi-da-ha" target="_blank">胡子大哈</a>
+  </li>
+  <li>
+    原文链接：<a href="http://huziketang.com/books/react/lesson25"> http://huziketang.com/books/react/lesson25 </a>
+  </li>
+  <li>转载请注明出处，保留原文链接和作者信息。</li>
+</ul>
+
+<p>（本文未审核）</p>
+
+<p>目前为止，第二阶段知识已经基本介绍完，我们已经具备了项目上手实战必备的 React.js 知识，现在可以把这些知识应用起来。接下来是实战环节，我们会继续上一阶段的例子，把评论功能做得更加复杂一点。</p>
+
+<p>我们在上一阶段的评论功能基础上加上以下功能需求：</p>
+
+<ol>
+  <li>页面加载完成自动聚焦到评论输入框。</li>
+  <li>把用户名持久化，存放到浏览器的 LocalStorage 中。页面加载时会把用户名加载出来显示到输入框，用户就不需要重新输入用户名了。</li>
+  <li>把已经发布的评论持久化，存放到浏览器的 LocalStorage 中。页面加载时会把已经保存的评论加载出来，显示到页面的评论列表上。</li>
+  <li>评论显示发布日期，如“1  秒前”，”30 分钟前”，并且会每隔 5 秒更新发布日期。</li>
+  <li>评论可以被删除。</li>
+  <li>类似 Markdown 的,行内代码块显示功能，用户输入的用 `` 包含起来的内容都会被处理成用 <code>&lt;code&gt;</code> 元素包含。例如输入 `console.log` 就会处理成 <code>&lt;code&gt;console.log&lt;/code&gt;</code> 再显示到页面上。</li>
+</ol>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/E01D3698-F041-4149-9626-849F023E5638.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/E01D3698-F041-4149-9626-849F023E5638.png" alt="React.js 小书实战评论功能图片" /></a></p>
+
+<p><a href="https://huzidaha.github.io/react-naive-book-examples/comment-app2/build/index.html">在线演示地址</a>。</p>
+
+<p>大家可以在原来的第一阶段代码的基础上进行修改，第一、二阶段评论功能代码可以在这里找到： <a href="https://github.com/huzidaha/react-naive-book-examples">react-naive-book-examples</a>。可以直接使用最新的样式文件 <a href="https://github.com/huzidaha/react-naive-book-examples/blob/master/comment-app2/src/index.css">index.css</a> 覆盖原来的 index.css。</p>
+
+<p>接下来可以分析如何利用第二阶段的知识来构建这些功能，在这个过程里面可能会穿插一些小技巧，希望对大家有用。我们回顾一下这个页面的组成：</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/1.003.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/1.003.png" alt="React.js 小书实战评论功能图片" /></a></p>
+
+<p>我们之前把页面分成了四种不同的组件：分别是 <code>CommentApp</code> 、<code>CommentInput</code>、<code>CommentList</code>、<code>Comment</code>。我们开始修改这个组件，把上面的需求逐个完成。</p>
+
+<h2 id="自动聚焦到评论框">自动聚焦到评论框</h2>
+<p>这个功能是很简单的，我们需要获取 <code>textarea</code> 的 DOM 元素然后调用 <code>focus()</code> API 就可以了。我们给输入框元素加上 <code>ref</code> 以便获取到 DOM  元素，修改 <code>src/CommentInput.js</code> 文件：</p>
+
+<pre><code class="language-javascript">...
+    &lt;textarea
+      ref={(textarea) =&gt; this.textarea = textarea}
+      value={this.state.content}
+      onChange={this.handleContentChange.bind(this)} /&gt;
+...
+</code></pre>
+
+<p>组件挂载完以后完成以后就可以调用 <code>this.textarea.focus()</code>，给 <code>CommentInput</code>  组件加上 <code>ComponentDidMount</code> 生命周期：</p>
+
+<pre><code class="language-javascript">class CommentInput extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func
+  }
+
+  constructor () {
+    super()
+    this.state = {
+      username: '',
+      content: ''
+    }
+  }
+
+  componentDidMount () {
+    this.textarea.focus()
+  }
+.,..
+</code></pre>
+
+<p>这个功能就完成了。现在体验还不是很好，接下来我们把用户名持久化一下，体验就会好很多。</p>
+
+<p>大家可以注意到我们给原来的 <code>props.onSubmit</code> 参数加了组件参数验证，在这次实战案例中，我们都会给评论功能的组件加上 <code>propTypes</code> 进行参数验证，接下来就不累述。</p>
+
+<h2 id="持久化用户名">持久化用户名</h2>
+<p>用户输入用户名，然后我们把用户名保存到浏览器的 LocalStorage 当中，当页面加载的时候再从 LocalStorage 把之前保存的用户名显示到用户名输入框当中。这样用户就不用每次都输入用户名了，并且评论框是自动聚焦的，用户的输入体验就好很多。</p>
+
+<p>我们监听用户名输入框失去焦点的事件 <code>onBlur</code>：</p>
+
+<pre><code class="language-javascript">...
+    &lt;input
+      value={this.state.username}
+      onBlur={this.handleUsernameBlur.bind(this)}
+      onChange={this.handleUsernameChange.bind(this)} /&gt;
+...
+</code></pre>
+
+<p>在 <code>handleUsernameBlur</code> 中我们把用户的输入内容保存到 LocalStorage 当中：</p>
+
+<pre><code class="language-javascript">class CommentInput extends Component {
+  constructor () {
+    super()
+    this.state = {
+      username: '',
+      content: ''
+    }
+  }
+
+  componentDidMount () {
+ ,   this.textarea.focus()
+  }
+
+  _saveUsername (username) {
+    localStorage.setItem('username', username)
+  }
+
+  handleUsernameBlur (event) {
+    this._saveUsername(event.target.value)
+  }
+...
+</code></pre>
+
+<p>在 <code>handleUsernameBlur</code> 中我们把用户输入的内容传给了 <code>_saveUsername</code> 私有方法（所有私有方法都以 <code>_</code> 开头）。<code>_saveUsername</code> 会设置 LocalStorage 中的 <code>username</code> 字段，用户名就持久化了。这样就相当于每当用户输入完用户名以后（输入框失去焦点的时候），都会把用户名自动保存一次。</p>
+
+<p>输入用户名，然后到浏览器里里面看看是否保存了：</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/04093DE1-B4C0-4CBD-B3F8-DF924C9F6799.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/04093DE1-B4C0-4CBD-B3F8-DF924C9F6799.png" alt="React.js 小书实战评论功能图片" /></a></p>
+
+<p>然后我们组件挂载的时候把用户名加载出来。这是一种数据加载操作，我们说过，不依赖 DOM 操作的组件启动的操作都可以放在 <code>componentWillMount</code> 中进行，所以给 <code>CommentInput</code> 添加 <code>componentWillMount</code> 的组件生命周期：</p>
+
+<pre><code class="language-javascript">...
+  componentWillMount () {
+    this._loadUsername()
+  }
+
+  _loadUsername () {
+    const username = localStorage.getItem('username')
+    if (username) {
+      this.setState({ username })
+    }
+  }
+
+  _saveUsername (username) {
+    localStorage.setItem('username', username)
+  }
+...
+</code></pre>
+
+<p><code>componentWillMount</code> 会调用 <code>_loadUsername</code> 私有方法，<code>_loadUsername</code> 会从 LocalStorage 加载用户名并且 <code>setState</code> 到组件的 <code>state.username</code> 中。那么组件在渲染的时候（<code>render</code> 方法）挂载的时候就可以用上用户名了。</p>
+
+<p>这样体验就好多了，刷新页面，不需要输入用户名，并且自动聚焦到了输入框。我们 1、 2 需求都已经完成。</p>
+
+<h2 id="小贴士">小贴士</h2>
+<p>这里插入一些小贴示，大家可以注意到我们组件的命名和方法的摆放顺序其实有一定的讲究，这里可以简单分享一下个人的习惯，仅供参考。</p>
+
+<p>组件的私有方法都用 <code>_</code> 开头，所有事件监听的方法都用 <code>handle</code> 开头。把事件监听方法传给组件的时候，属性名用 <code>on</code> 开头。例如：</p>
+
+<pre><code class="language-javascript">&lt;CommentInput
+  onSubmit={this.handleSubmitComment.bind(this)} /&gt;
+</code></pre>
+
+<p>这样统一规范处理事件命名会给我们带来语义化组件的好处，监听（<code>on</code>）<code>CommentInput</code> 的 <code>Submit</code> 事件，并且交给 <code>this</code> 去处理（<code>handle</code>）。这种规范在多人协作的时候也会非常方便。</p>
+
+<p>另外，组件的内容编写顺序如下：</p>
+
+<ol>
+  <li>static 开头的类属性，如 <code>defaultProps</code>、<code>propTypes</code>。</li>
+  <li>构造函数，<code>constructor</code>。</li>
+  <li>getter/setter（还不了解的同学可以暂时忽略）。</li>
+  <li>组件生命周期。</li>
+  <li><code>_</code> 开头的私有方法。</li>
+  <li>事件监听方法，<code>handle*</code>。</li>
+  <li><code>render*</code>开头的方法，有时候 <code>render()</code> 方法里面的内容会分开到不同函数里面进行，这些函数都以 <code>render*</code> 开头。</li>
+  <li><code>render()</code> 方法。</li>
+</ol>
+
+<p>如果所有的组件都按这种顺序来编写，那么维护起来就会方便很多，多人协作的时候别人理解代码也会一目了然。</p>
+
+<hr />
+
+<blockquote>
+  <p>因为第三方评论工具有问题，对本章节有任何疑问的朋友可以移步到 <a target="_blank" href="http://scriptoj.com/category/4/react-js-小书交流区">React.js 小书的论坛</a> 发帖，我会回答大家的疑问。</p>
+</blockquote>
+
+    </div>
+		<br/>
+		<hr />
+		<br />
+		<div class="PageNavigation">
+			
+			<p>
+				<a class="next" href="/books/react/lesson26">下一节：实战分析：评论功能（五）</a>
+			</p>
+			
+			<br/>
+			
+			<p>
+				<a class="prev" href="/books/react/lesson24">上一节：PropTypes 和组件参数验证</a>
+			</p>
+			
+		</div>
+		<!-- <a class="ad" href="https://aonaotu.com" target="_blank"> -->
+			<!-- <div class="ad-logo">
+				<img src="/books/react/assets/img/ad-logo.svg">
+				<p class="ad-title">凹脑图</p>
+			</div>
+			<p class="ad-wording">迄今为止最简单好用的在线思维导图工具</p>
+			<span class="ad-indicator">广告</span>
+			<img src="/books/react/assets/img/ad-bg-2.svg" class="ad-bg-2">
+		</a> -->
+		<!-- <div class='share-block margin-top-gap'>
+			<p>如果你觉得小书写得还不错，可以请胡子大哈喝杯茶 :)</p>
+			<button class='donate-button' id='donate-button' type="button">赞赏</button>
+		</div> -->
+		<div class='share-block margin-bottom-gap'>
+			<p>传播一下知识也是一个很好的选择</p>
+			<div class="share-block-inner">
+				<div class="jiathis_style_24x24">
+					<a class="jiathis_button_qzone"></a>
+					<a class="jiathis_button_tsina"></a>
+					<a class="jiathis_button_tqq"></a>
+					<a class="jiathis_button_weixin"></a>
+					<a class="jiathis_button_renren"></a>
+					<a href="http://www.jiathis.com/share?uid=2127727" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+				</div>
+				<script type="text/javascript">
+				var jiathis_config = {data_track_clickback:'true'};
+				</script>
+				<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2127727" charset="utf-8"></script>
+			</div>
+		</div>
+		<!-- UY BEGIN -->
+		<div id="uyan_frame"></div>
+		<script type="text/javascript">
+		var paths = window.location.pathname.split('/')
+		var lessonName = paths[paths.length - 1]
+		var uyan_config = {
+			// 'url': 'http://react.huziketang.com/blog/' + lessonName,
+			'du': 'react.huziketang.com'
+		}
+		</script>
+		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2127727"></script>
+		<!-- UY END -->
+		<!--wechat donate-->
+		<div class='donate-mask' id='donate-mask'>
+			<img src='https://huzidaha.github.io/static/assets/img/wechat-pay.png' id='wechat-pay' />
+		</div>
+		<script type="text/javascript">
+			// var donateMask = document.getElementById('donate-mask')
+			// var donateButton = document.getElementById('donate-button')
+			// var wechatPay = document.getElementById('wechat-pay')
+			// donateButton.addEventListener('click', function () {
+			// 	donateMask.style.display = 'flex'
+			// }, false)
+			// donateMask.addEventListener('click', function () {
+			// 	donateMask.style.display = 'none'
+			// }, false)
+			// wechatPay.addEventListener('click', function (event) {
+			// 	event.stopPropagation()
+			// }, false)
+		</script>
+	</div>
+
+    </div>
+    <script src="/books/react/assets/js/highlight.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      if (window.location.origin.match(/localhost/)) return
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f08b5240ef2d1692572ce0f7756b325e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      var bp = document.createElement('script');
+      // push baidu.com
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+    var wrapper = document.getElementById('wrapper')
+    var floatWechat = document.getElementById('float-wechat')
+
+    function resetAll (event) {
+      var rect = wrapper.getBoundingClientRect()
+      resetFloatWechat(rect)
+    }
+    function resetFloatWechat(rect) {
+      var left = rect.left + rect.width
+      floatWechat.style.left = left + 'px'
+      floatWechat.style.display = 'block'
+    }
+    window.addEventListener('resize', resetAll)
+    resetAll()
+    </script>
+
+</body>
+
+</html>
+<link rel="stylesheet" href="http://huziketang.com/books/react/assets/css/main.css">

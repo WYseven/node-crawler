@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="GNvdsbNFPS" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    
+      <title>高阶组件（Higher-Order Components） | React.js 小书</title>
+      <meta name="keywords" content="React.js,React.js 小书,高阶组件,实战" />
+      <meta name="description" content="React.js 小书是一个开源、免费、专业、简单的 React.js 教程。React.js 中的高阶组件就是一个函数，传给它一个组件，它返回一个新的组件。注意，高阶函数是一个函数，而不是组件。" />
+    
+
+    
+
+    <link rel="icon" href="https://huzidaha.github.io/static/assets/img/favicon.ico">
+    <link rel="stylesheet"
+href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="/books/react/assets/css/main.css">
+</head>
+
+<body>
+
+    <div class='float-wechat' id='float-wechat'>
+    	<img src='https://huzidaha.github.io/static/assets/img/wechat-user.jpeg' />
+      <p>加,入《React.js 小书》读者交流群，一起讨论、交流、学习前端技术。</p>
+    </div>
+    <div class="wrapper" id='wrapper'>
+      <style media="screen">
+@media (max-width: 1335px) and (min-width: 900px) {
+	.wrapper {
+		margin-left: 329px;
+	}
+}
+@media (max-width: 900px) {
+	#table-of-content {
+		margin-left: -350px;
+	}
+}
+</style>
+<h1 style='position: relative; top: -15px;'>React.js 小书</h1>
+
+<link ref='prefetch' href="/books/react/lesson29" />
+
+
+<nav class='table-of-content' id='table-of-content'>
+	<a href='/books/react'>&lt;-- 首页</a>
+	<h3>第一阶段</h3>
+  
+  
+		<a  href="/books/react/lesson1" title="React.js 简介">1. React.js 简介</a>
+  
+  
+  
+		<a  href="/books/react/lesson2" title="前端组件化（一）：从一个简单的例子讲起">2. 前端组件化（一）：从一个简单的例子讲起</a>
+  
+  
+  
+		<a  href="/books/react/lesson3" title="前端组件化（二）：优化 DOM 操作">3. 前端组件化（二）：优化 DOM 操作</a>
+  
+  
+  
+		<a  href="/books/react/lesson4" title="前端组件化（三）：抽象出公共组件类">4. 前端组件化（三）：抽象出公共组件类</a>
+  
+  
+  
+		<a  href="/books/react/lesson5" title="React.js 基本环境安装">5. React.js 基本环境安装</a>
+  
+  
+  
+		<a  href="/books/react/lesson6" title="使用 JSX 描述 UI 信息">6. 使用 JSX 描述 UI 信息</a>
+  
+  
+  
+		<a  href="/books/react/lesson7" title="组件的 render 方法">7. 组件的 render 方法</a>
+  
+  
+  
+		<a  href="/books/react/lesson8" title="组件的组合、嵌套和组件树">8. 组件的组合、嵌套和组件树</a>
+  
+  
+  
+		<a  href="/books/react/lesson9" title="事件监听">9. 事件监听</a>
+  
+  
+  
+		<a  href="/books/react/lesson10" title="组件的 state 和 setState">10. 组件的 state 和 setState</a>
+  
+  
+  
+		<a  href="/books/react/lesson11" title="配置组件的 props">11. 配置组件的 props</a>
+  
+  
+  
+		<a  href="/books/react/lesson12" title="state vs props">12. state vs props</a>
+  
+  
+  
+		<a  href="/books/react/lesson13" title="渲染列表数据">13. 渲染列表数据</a>
+  
+  
+  
+		<a  href="/books/react/lesson14" title="实战分析：评论功能（一）">14. 实战分析：评论功能（一）</a>
+  
+  
+  
+		<a  href="/books/react/lesson15" title="实战分析：评论功能（二）">15. 实战分析：评论功能（二）</a>
+  
+  
+  
+		<a  href="/books/react/lesson16" title="实战分析：评论功能（三）">16. 实战分析：评论功能（三）</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	<h3>第二阶段</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+		<a  href="/books/react/lesson17" title="前端应用状态管理 —— 状态提升">17. 前端应用状态管理 —— 状态提升</a>
+  
+  
+  
+		<a  href="/books/react/lesson18" title="挂载阶段的组件生命周期（一）">18. 挂载阶段的组件生命周期（一）</a>
+  
+  
+  
+		<a  href="/books/react/lesson19" title="挂载阶段的组件生命周期（二）">19. 挂载阶段的组件生命周期（二）</a>
+  
+  
+  
+		<a  href="/books/react/lesson20" title="更新阶段的组件生命周期">20. 更新阶段的组件生命周期</a>
+  
+  
+  
+		<a  href="/books/react/lesson21" title="ref 和 React.js 中的 DOM 操作">21. ref 和 React.js 中的 DOM 操作</a>
+  
+  
+  
+		<a  href="/books/react/lesson22" title="props.children 和容器类组件">22. props.children 和容器类组件</a>
+  
+  
+  
+		<a  href="/books/react/lesson23" title="dangerouslySetHTML 和 style 属性">23. dangerouslySetHTML 和 style 属性</a>
+  
+  
+  
+		<a  href="/books/react/lesson24" title="PropTypes 和组件参数验证">24. PropTypes 和组件参数验证</a>
+  
+  
+  
+		<a  href="/books/react/lesson25" title="实战分析：评论功能（四）">25. 实战分析：评论功能（四）</a>
+  
+  
+  
+		<a  href="/books/react/lesson26" title="实战分析：评论功能（五）">26. 实战分析：评论功能（五）</a>
+  
+  
+  
+		<a  href="/book,s/react/lesson27" title="实战分析：评论功能（六）">27. 实战分析：评论功能（六）</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+	<h3>第三阶段</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+		<a  class='active'  href="/books/react/lesson28" title="高阶组件（Higher-Order Components）">28. 高阶组件（Higher-Order Components）</a>
+  
+  
+  
+		<a  href="/books/react/lesson29" title="React.js 的 context">29. React.js 的 context</a>
+  
+  
+  
+		<a  href="/books/react/lesson30" title="动手实现 Redux（一）：优雅地修改共享状态">30. 动手实现 Redux（一）：优雅地修改共享状态</a>
+  
+  
+  
+		<a  href="/books/react/lesson31" title="动手实现 Redux（二）：抽离 store 和监控数据变化">31. 动手实现 Redux（二）：抽离 store 和监控数据变化</a>
+  
+  
+  
+		<a  href="/books/react/lesson32" title="动手实现 Redux（三）：纯函数（Pure Function）简介">32. 动手实现 Redux（三）：纯函数（Pure Function）简介</a>
+  
+  
+  
+		<a  href="/books/react/lesson33" title="动手实现 Redux（四）：共享结构的对象提高性能">33. 动手实现 Redux（四）：共享结构的对象提高性能</a>
+  
+  
+  
+		<a  href="/books/react/lesson34" title="动手实现 Redux（五）：不要问为什么的 reducer">34. 动手实现 Redux（五）：不要问为什么的 reducer</a>
+  
+  
+  
+		<a  href="/books/react/lesson35" title="动手实现 Redux（六）：Redux 总结">35. 动手实现 Redux（六）：Redux 总结</a>
+  
+  
+  
+		<a  href="/books/react/lesson36" title="动手实现 React-redux（一）：初始化工程">36. 动手实现 React-redux（一）：初始化工程</a>
+  
+  
+  
+		<a  href="/books/react/lesson37" title="动手实现 React-redux（二）：结合 context 和 store">37. 动手实现 React-redux（二）：结合 context 和 store</a>
+  
+  
+  
+		<a  href="/books/react/lesson38" title="动手实现 React-redux（三）：connect 和 mapStateToProps">38. 动手实现 React-redux（三）：connect 和 mapStateToProps</a>
+  
+  
+  
+		<a  href="/books/react/lesson39" title="动手实现 React-redux（四）：mapDispatchToProps">39. 动手实现 React-redux（四）：mapDispatchToProps</a>
+  
+  
+  
+		<a  href="/books/react/lesson40" title="动手实现 React-redux（五）：Provider">40. 动手实现 React-redux（五）：Provider</a>
+  
+  
+  
+		<a  href="/books/react/lesson41" title="动手实现 React-redux（六）：React-redux 总结">41. 动手实现 React-redux（六）：React-redux 总结</a>
+  
+  
+  
+		<a  href="/books/react/lesson42" title="使用真正的 Redux 和 React-redux">42. 使用真正的 Redux 和 React-redux</a>
+  
+  
+  
+		<a  href="/books/react/lesson43" title="Smart 组件 vs Dumb 组件">43. Smart 组件 vs Dumb 组件</a>
+  
+  
+  
+		<a  href="/books/react/lesson44" title="实战分析：评论功能（七）">44. 实战分析：评论功能（七）</a>
+  
+  
+  
+		<a  href="/books/react/lesson45" title="实战分析：评论功能（八）">45. 实战分析：评论功能（八）</a>
+  
+  
+  
+		<a  href="/books/react/lesson46" title="实战分析：评论功能（九）">46. 实战分析：评论功能（九）</a>
+  
+  
+</nav>
+<div id="mask-template">
+	<div></div>
+</div>
+<style>
+	#granted-modal {
+		display: none;
+		position: fixed;
+		margin: auto;
+		left: 100px;
+		top: 0;
+		bottom: 100px;
+		right: 0;
+		width: 500px;
+		height: 300px;
+		background: #fff;
+		z-index: 100;
+		border-radius: 5px;
+	}
+	#try-to-buy {
+		display: none;
+	}
+	.error-message {
+    position: absolute;
+    bottom: 7px;
+    right: -30px;
+    font-size: 12px;
+    color: rgb(211, 53, 62);
+  }
+	.field {
+		position: relative;
+		margin-top: 25px;
+	}
+	.modal-head {
+		font-size: 20px;
+    text-align: center;
+    margin-top: 30px;
+	}
+	.granted-footer {
+		text-align: center;
+	}
+	#back-to-input {
+		font-size: 12px;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+	}
+	.hover {
+		cursor: pointer;
+	}
+	.granted-footer {
+		position: absolute;
+    margin: auto;
+		padding-top: 15px;
+    left: 30px;
+    right: 30px;
+    bottom: 20px;
+		border-top: 1px solid #eee;
+	}
+	#buy-now {
+		color: #00a854;
+	}
+	.field label {
+		display: inline-block;
+		width: 90px;
+		text-align: right;
+	}
+	.field label::after {
+		content: "："
+	}
+	.granted-form {
+		width: 80%;
+		margin: 0 auto;
+		margin-top: 25px;
+	}
+	.submit {
+		display: inline-block;
+		float: right;
+	}
+	.button {
+		background: #f7f7f7;
+		border: 1px solid #ccc;
+		padding: 5px 20px;
+		border-radius: 3px;
+		outline: none;
+	}
+	.button:hover {
+		background: #fff;
+	}
+	.field input {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #e0dbdb;
+    width: 166px;
+	}
+</style>
+<div id="granted-modal">
+	<div style="padding: 10px;">
+		<div id="readcode-input-area">
+			<h2 class="modal-head">阅读第三阶段，请输入你的阅读码 </h2>
+			<form class="granted-form" id="read-code-form">
+				<div class="field">
+					<label>Email</label>
+					<input type="email" id="email">
+				</div>
+				<div class="field">
+					<label>阅读码</label>
+					<input type="text" id="read-code">
+				</div>
+				<button id="check-granted" class="button hover submit">确认</button>
+			</form>
+			<div class="granted-footer">
+				还没有阅读码？<b>¥10</b> 元即可阅读所有章节
+				<p style="margin-top: 10px;"><a class="hover" id="buy-now">马上获取阅读码</a></p>
+			</div>
+		</div>
+		<div id="try-to-buy">
+			<div id="back-to-input" class="hover">&lt;&lt; 返回</div>
+			<h2 class="modal-head">输入你的邮箱，系统会给你发送邮件</h2>
+			<form class="granted-form" id="get-read-code-form">
+				<div class="field">
+					<label>Email</label>
+					<input type="email" id="reader-email">
+				</div>
+				<button id="alipay" style="margin-top: 20px;" class="hover submit button">获取阅读码</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="/books/react/assets/js/jquery-3.2.1.min.js"></script>
+<script src="/books/react/assets/js/pay.min.js"></script>
+<script type="text/javascript">
+var tableOfContent = document.getElementById('table-of-content')
+var timer = null
+function resetTableOfContent (rect) {
+  scrollTop = localStorage.getItem('scrollTop') * 1
+  scrollTop = scrollTop || 0
+  tableOfContent.scrollTop = scrollTop
+}
+tableOfContent.addEventListener('scroll', function (event) {
+  clearTimeout(timer)
+  timer = setTimeout(function() {
+    localStorage.setItem('scrollTop', tableOfContent.scrollTop)
+  }, 50)
+}, false)
+resetTableOfContent()
+</script>
+<div class="post">
+	<div class="post__back">
+  	<a href="/books/react">&lt;-- 返回首页</a>
+    <div class="post__title">
+    	<h1>高阶组件（Higher-Order Components）</h1>
+    </div>
+    <div class="post__meta">
+    	<p></p>
+    </div>
+    <div class="post__content"?>
+      <ul style="font-size: 14px; margin-top: -10px;">
+  <li>
+    作者：<a href="https://www.zhihu.com/people/hu-zi-da-ha" target="_blank">胡子大哈</a>
+  </li>
+  <li>
+    原文链接：<a href="http://huziketang.com/books/react/lesson28"> http://huziketang.com/books/react/lesson28 </a>
+  </li>
+  <li>转载请注明出处，保留原文链接和作者信息。</li>
+</ul>
+
+<p>（本文未审核）</p>
+
+<p>有时候人们很喜欢造一些名字很吓人的名词，让人一听这个名词就觉得自己不可能学会，从而让人望而却步。但是其实这些名词背后所代表的东西其实很简单。</p>
+
+<p>我不能说高阶组件就是这么一个东西。但是它是一个概念上很简单，但却非常常用、实用的东西，被大量 React.js 相关的第三方库频繁地使用。在前端的业务开发当中，你不掌握高阶组件其实也可以完成项目的开发，但是如果你能够灵活地使用高阶组件，可以让你代码更加优雅，复用性、灵活性更强。它是一个加分项，而且加的分还不少。</p>
+
+<p>本章节可能有部分内容理解起来会有难度，如果你觉得无法完全理解本节内容。可以先简单理解高阶组件的概念和作用即可，其他内容选择性地跳过。</p>
+
+<p>了解高阶组件对我们理解各种 React.js 第三方库的原理很有帮助。</p>
+
+<h2 id="�,��么是高阶组件">什么是高阶组件</h2>
+<p><em>高阶组件就是一个函数，传给它一个组件，它返回一个新的组件。</em></p>
+
+<pre><code class="language-javascript">const NewComponent = higherOrderComponent(OldComponent)
+</code></pre>
+
+<p>重要的事情再重复一次，高阶组件是一个函数（而不是组件），它接受一个组件作为参数，返回一个新的组件。这个新的组件会使用你传给它的组件作为子组件，我们看看一个很简单的高阶组件：</p>
+
+<pre><code class="language-javascript">import React, { Component } from 'react'
+
+export default (WrappedComponent) =&gt; {
+  class NewComponent extends Component {
+    // 可以做很多自定义逻辑
+    render () {
+      return &lt;WrappedComponent /&gt;
+    }
+  }
+  return NewComponent
+}
+</code></pre>
+
+<p>现在看来好像什么用都没有，它就是简单的构建了一个新的组件类 <code>NewComponent</code>，然后把传进入去的 <code>WrappedComponent</code> 渲染出来。但是我们可以给 <code>NewCompoent</code> 做一些数据启动工作：</p>
+
+<pre><code class="language-javascript">import React, { Component } from 'react'
+
+export default (WrappedComponent, name) =&gt; {
+  class NewComponent extends Component {
+    constructor () {
+      super()
+      this.state = { data: null }
+    }
+
+    componentWillMount () {
+      let data =, localStorage.getItem(name)
+      this.setState({ data })
+    }
+
+    render () {
+      return &lt;WrappedComponent data={this.state.data} /&gt;
+    }
+  }
+  return NewComponent
+}
+</code></pre>
+
+<p>现在 <code>NewComponent</code> 会根据第二个参数 <code>name</code> 在挂载阶段从 LocalStorage 加载数据，并且 <code>setState</code> 到自己的 <code>state.data</code> 中，而渲染的时候将 <code>state.data</code> 通过 <code>props.data</code> 传给 <code>WrappedComponent</code>。</p>
+
+<p>这个高阶组件有什么用呢？假设上面的代码是在 <code>src/wrapWithLoadData.js</code> 文件中的，我们可以在别的地方这么用它：</p>
+
+<pre><code class="language-javascript">import wrapWithLoadData from './wrapWithLoadData'
+
+class InputWithUserName extends Component {
+  render () {
+    return &lt;input value={this.props.data} /&gt;
+  }
+}
+
+InputWithUserName = wrapWithLoadData(InputWithUserName, 'username')
+export default InputWithUserName
+</code></pre>
+
+<p>假如 <code>InputWithUserName</code> 的功能需求是挂载的时候从 LocalStorage 里面加载 <code>username</code> 字段作为 <code>&lt;input /&gt;</code> 的 <code>value</code> 值，现在有了 <code>wrapWithLoadData</code>，我们可以很容易地做到这件事情。</p>
+
+<p>只需要定义一个非常简单的 <code>InputWithUserName</code>，它会把 <code>props.data</code,> 作为 <code>&lt;input /&gt;</code> 的 <code>value</code> 值。然把这个组件和 <code>'username'</code> 传给 <code>wrapWithLoadData</code>，<code>wrapWithLoadData</code> 会返回一个新的组件，我们用这个新的组件覆盖原来的 <code>InputWithUserName</code>，然后再导出去模块。</p>
+
+<p>别人用这个组件的时候实际是用了<em>被加工过</em>的组件：</p>
+
+<pre><code class="language-javascript">import InputWithUserName from './InputWithUserName'
+
+class Index extends Component {
+  render () {
+    return (
+      &lt;div&gt;
+        用户名：&lt;InputWithUserName /&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre>
+
+<p>根据 <code>wrapWithLoadData</code> 的代码我们可以知道，这个新的组件挂载的时候会先去 LocalStorage 加载数据，渲染的时候再通过 <code>props.data</code> 传给真正的 <code>InputWithUserName</code>。</p>
+
+<p>如果现在我们需要另外一个文本输入框组件，它也需要 LocalStorage 加载 <code>'content'</code> 字段的数据。我们只需要定义一个新的 <code>TextareaWithContent</code>：</p>
+
+<pre><code class="language-javascript">import wrapWithLoadData from './wrapWithLoadData'
+
+class TextareaWithContent extends Component {
+  render () {
+    return &lt;textarea value={this.props.data} /&gt;
+  }
+}
+
+TextareaWithContent = wrapWithLoadData(TextareaWithContent, 'content')
+export default TextareaWithContent
+</code></pre>
+
+<p>写起来非常轻松，我们根本不需要重复写从 LocalStorage 加载数据字段的逻辑，直接用 <code>wrapWithLoadData</code> 包装一下就可以了。</p>
+
+<p>我们来回顾一下到底发生了什么事情，对于 <code>InputWithUserName</code> 和 <code>TextareaWithContent</code> 这两个组件来说，它们的需求有着这么一个相同的逻辑：“挂载阶段从 LocalStorage 中加载特定字段数据”。</p>
+
+<p>如果按照之前的做法，我们需要给它们两个都加上 <code>componentWillMount</code> 生命周期，然后在里面调用 LocalStorage。要是有第三个组件也有这样的加载逻辑，我又得写一遍这样的逻辑。但有了 <code>wrapWithLoadData</code> 高阶组件，我们把这样的逻辑用一个组件包裹了起来，并且通过给高阶组件传入 <code>name</code> 来达到不同字段的数据加载。充分复用了逻辑代码。</p>
+
+<p>到这里，高阶组件的作用其实不言而喻，<em>其实就是为了组件之间的代码复用</em>。组件可能有着某些相同的逻辑，把这些逻辑抽离出来，放到高阶组件中进行复用。<em>高阶组件内部的包装组件和被包装组件之间通过 <code>props</code> 传递数据</em>。</p>
+
+<h2 id="高阶组件的灵活性">高阶组件的灵活性</h2>
+<p>代,码复用的方法、形式有很多种，你可以用类继承来做到代码复用，也可以分离模块的方式。但是高阶组件这种方式很有意思，也很灵活。学过设计模式的同学其实应该能反应过来，它其实就是设计模式里面的装饰者模式。它通过组合的方式达到很高的灵活程度。</p>
+
+<p>假设现在我们需求变化了，现在要的是通过 Ajax 加载数据而不是从 LocalStorage 加载数据。我们只需要新建一个 <code>wrapWithAjaxData</code> 高阶组件：</p>
+
+<pre><code class="language-javascript">import React, { Component } from 'react'
+
+export default (WrappedComponent, name) =&gt; {
+  class NewComponent extends Component {
+    constructor () {
+      super()
+      this.state = { data: null }
+    }
+
+    componentWillMount () {
+      ajax.get('/data/' + name, (data) =&gt; {
+        this.setState({ data })
+      })
+    }
+
+    render () {
+      return &lt;WrappedComponent data={this.state.data} /&gt;
+    }
+  }
+  return NewComponent
+}
+</code></pre>
+
+<p>其实就是改了一下 <code>wrapWithLoadData</code> 的 <code>componentWillMount</code> 中的逻辑，改成了从服务器加载数据。现在只需要把 <code>InputWithUserName</code> 稍微改一下：</p>
+
+<pre><code class="language-javascript">import wrapWithAjaxData from './wrapWithAjaxData'
+
+class InputWithUserName extends Component {
+  render () {
+    return &lt;input value={this.props.data} /&gt;
+  }
+}
+
+InputWithUserName = wrapWithAjaxData(InputWithUserName, 'username')
+export default InputWithUserName
+</code></pre>
+
+<p>只要改一下包装的高阶组件就可以达到需要的效果。而且我们并没有改动 <code>InputWithUserName</code> 组件内部的任何逻辑，也没有改动 <code>Index</code> 的任何逻辑，只是改动了中间的高阶组件函数。</p>
+
+<p>（以下内容为选读内容，有兴趣的同学可以继续往下读，否则也可以直接跳到文末的总结部分。）</p>
+
+<h2 id="多层高阶组件选读">多层高阶组件（选读）</h2>
+<p>假如现在需求有变化了：我们需要先从 LocalStorage 中加载数据，再用这个数据去服务器取数据。我们改一下（或者新建一个）<code>wrapWithAjaxData</code> 高阶组件，修改其中的 <code>componentWillMount</code>：</p>
+
+<pre><code class="language-javascript">...
+    componentWillMount () {
+      ajax.get('/data/' + this.props.data, (data) =&gt; {
+        this.setState({ data })
+      })
+    }
+...
+</code></pre>
+
+<p>它会用传进来的 <code>props.data</code> 去服务器取数据。这时候修改 <code>InputWithUserName</code>：</p>
+
+<pre><code class="language-javascript">import wrapWithLoadData from './wrapWithLoadData'
+import wrapWithAjaxData from './wrapWithAjaxData'
+
+class InputWithUserName extends Component {
+  render () {
+    return &lt;input value={this.props.data} /&gt;
+  }
+}
+
+InputWithUserName = wrapWithAjaxData(InputWithUserName)
+InputWithUserName = wrapWithLoadData(InputWithUserName, 'username')
+export default InputWithUserName
+</code></pre>
+
+<p>大家可以看到，我们给 <code>InputWithUserName</code> 应用了两种高阶组件：先用 <code>wrapWithAjaxData</code> 包裹 <code>InputWithUserName</code>，再用 <code>wrapWithLoadData </code> 包含上次包裹的结果。它们的关系就如下图的三个圆圈：</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/A8F1DD5F-1995-419E-8551-4FC2D59F58B4.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/A8F1DD5F-1995-419E-8551-4FC2D59F58B4.png" alt="React.js 小书实战高阶组件图片" /></a></p>
+
+<p>实际上最终得到的组件会先去 LocalStorage 取数据，然后通过 <code>props.data</code> 传给下一层组件，下一层用这个 <code>props.data</code> 通过 Ajax 去服务端取数据，然后再通过 <code>props.data</code> 把数据传给下一层，也就是 <code>InputWithUserName</code>。大家可以体会一下下图尖头代表的组件之间的数据流向：</p>
+
+<p><a href="http://huzidaha.github.io/static/assets/img/posts/8F6C1E91-B365-4919-84C3-2252223621F8.png" target="_blank"><img src="http://huzidaha.github.io/static/assets/img/posts/8F6C1E91-B365-4919-84C3-2252223621F8.png" alt="React.js 小书实战高阶组件图片" /></a></p>
+
+<h2 id="用高阶组件改造评论功能选读">用高阶组件改造评论功能（选读）</h2>
+<p>大家对这种在挂载阶段从 LocalStorage 加载数据的模式都很熟悉，在上一阶段的实战中，<code>CommentInput</code> 和 <code>CommentApp</code> 都用了这种方式加载、保存数据。实际上我们可以构建一个高阶组件把它们的相同的逻辑抽离出来，构建一个高阶组件 <code>wrapWithLoadData</code>：</p>
+
+<pre><code class="language-javascript">export default (WrappedComponent, name) =&gt; {
+  class LocalStorageActions extends Component {
+    constructor () {
+      super()
+      this.state = { data: null }
+    }
+
+    componentWillMount () {
+      let data = localStorage.getItem(name)
+      try {
+        // 尝试把它解析成 JSON 对象
+        this.setState({ data: JSON.parse(data) })
+      } catch (e) {
+        // 如果出错了就当普通字符串读取
+        this.setState({ data })
+      }
+    }
+
+    saveData (data) {
+      try {
+        // 尝试把它解析成 JSON 字符串
+        localStorage.setItem(name, JSON.stringify(data))
+      } catch (e) {
+        // 如果出错了就当普通字符串保存
+        localStorage.setItem(name, `${data}`)
+      }
+    }
+
+    render () {
+     , return (
+        &lt;WrappedComponent
+          data={this.state.data}
+          saveData={this.saveData.bind(this)}
+          // 这里的意思是把其他的参数原封不动地传递给被包装的组件
+          {...this.props} /&gt;
+      )
+    }
+  }
+  return LocalStorageActions
+}
+</code></pre>
+
+<p><code>CommentApp</code> 可以这样使用：</p>
+
+<pre><code class="language-javascript">class CommentApp extends Component {
+  static propTypes = {
+    data: PropTypes.any,
+    saveData: PropTypes.func.isRequired
+  }
+
+  constructor (props) {
+    super(props)
+    this.state = { comments: props.data }
+  }
+
+  handleSubmitComment (comment) {
+    if (!comment) return
+    if (!comment.username) return alert('请输入用户名')
+    if (!comment.content) return alert('请输入评论内容')
+    const comments = this.state.comments
+    comments.push(comment)
+    this.setState({ comments })
+    this.props.saveData(comments)
+  }
+
+  handleDeleteComment (index) {
+    const comments = this.state.comments
+    comments.splice(index, 1)
+    this.setState({ comments })
+    this.props.saveData(comments)
+  }
+
+  render() {
+    return (
+      &lt;div className='wrapper'&gt;
+        &lt;CommentInput onSubmit={this.handleSubmitComment.bind(this)} /&gt;
+        &lt;CommentList
+          comments={this.state.comments}
+          onDeleteComment={this.handleDeleteComment.bind(this)} /&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+
+CommentApp = wrapWithLoadData(CommentApp, 'comments')
+export default CommentApp
+</code></pre>
+
+<p>同样地可以在 <code>CommentInput</code> 中使用 <code>wrapWithLoadData</code>，这里就不贴代码了。有兴趣的同学可以查看<a href="https://github.com/huzidaha/react-naive-book-examples/commit/0d67eab713c042301fa4992c719069e92a7243f5">高阶组件重构的 CommentApp 版本</a>。</p>
+
+<h2 id="总结">总结</h2>
+<p><em>高阶组件就是一个函数，传给它一个组件，它返回一个新的组件</em>。新的组件使用传入的组件作为子组件。</p>
+
+<p><em>高阶组件的作用是用于代码复用</em>，可以把组件之间可复用的代码、逻辑抽离到高阶组件当中。<em>新的组件和传入的组件通过 <code>props</code> 传递信息</em>。</p>
+
+<p>高阶组件有助于提高我们代码的灵活性，逻辑的复用性。灵活和熟练地掌握高阶组件的用法需要经验的积累还有长时间的思考和练习，如果你觉得本章节的内容无法完全消化和掌握也没有关系，可以先简单了解高阶组件的定义、形式和作用即可。</p>
+
+<h2 id="课后练习">课后练习</h2>
+<p>*<a target="_blank" href="http://scriptoj.com/problems/14">React.js 加载、刷新数据 - 高阶组件</a></p>
+
+<hr />
+
+<blockquote>
+  <p>因为第三方评论工具有问题，对本章节有任何疑问的朋友可以移步到 <a target="_blank" href="http://scriptoj.com/category/4/react-js-小书交流区">React.js 小书的论坛</a> 发帖，我会回答大家的疑问。</p>
+</blockquote>
+
+    </div>
+		<br/>
+		<hr />
+		<br />
+		<div class="PageNavigation">
+			
+			<p>
+				<a class="next" href="/books/react/lesson29">下一节：React.js 的 context</a>
+			</p>
+			
+			<br/>
+			
+			<p>
+				<a class="prev" href="/books/react/lesson27">上一节：实战分析：评论功能（六）</a>
+			</p>
+			
+		</div>
+		<!-- <a class="ad" href="https://aonaotu.com" target="_blank"> -->
+			<!-- <div class="ad-logo">
+				<img src="/books/react/assets/img/ad-logo.svg">
+				<p class="ad-title">凹脑图</p>
+			</div>
+			<p class="ad-wording">迄今为止最简单好用的在线思维导图工具</p>
+			<span class="ad-indicator">广告</span>
+			<img src="/books/react/assets/img/ad-bg-2.svg" class="ad-bg-2">
+		</a> -->
+		<!-- <div class='share-block margin-top-gap'>
+			<p>如果你觉得小书写得还不错，可以请胡子大哈喝杯茶 :)</p>
+			<button class='donate-button' id='donate-button' type="button">赞赏</button>
+		</div> -->
+		<div class='share-block margin-bottom-gap'>
+			<p>传播一下知识也是一个很好的选择</p>
+			<div class="share-block-inner">
+				<div class="jiathis_style_24x24">
+					<a class="jiathis_button_qzone"></a>
+					<a class="jiathis_button_tsina"></a>
+					<a class="jiathis_button_tqq"></a>
+					<a class="jiathis_button_weixin"></a>
+					<a class="jiathis_button_renren"></a>
+					<a href="http://www.jiathis.com/share?uid=2127727" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+				</div>
+				<script type="text/javascript">
+				var jiathis_config = {data_track_clickback:'true'};
+				</script>
+				<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2127727" charset="utf-8"></script>
+			</div>
+		</div>
+		<!-- UY BEGIN -->
+		<div id="uyan_frame"></div>
+		<script type="text/javascript">
+		var paths = window.location.pathname.split('/')
+		var lessonName = paths[paths.length - 1]
+		var uyan_config = {
+			// 'url': 'http://react.huziketang.com/blog/' + lessonName,
+			'du': 'react.huziketang.com'
+		}
+		</script>
+		<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2127727"></script>
+		<!-- UY END -->
+		<!--wechat donate-->
+		<div class='donate-mask' id='donate-mask'>
+			<img src='https://huzidaha.github.io/static/assets/img/wechat-pay.png' id='wechat-pay' />
+		</div>
+		<script type="text/javascript">
+			// var donateMask = document.getElementById('donate-mask')
+			// var donateButton = document.getElementById('donate-button')
+			// var wechatPay = document.getElementById('wechat-pay')
+			// donateButton.addEventListener('click', function () {
+			// 	donateMask.style.display = 'flex'
+			// }, false)
+			// donateMask.addEventListener('click', function () {
+			// 	donateMask.style.display = 'none'
+			// }, false)
+			// wechatPay.addEventListener('click', function (event) {
+			// 	event.stopPropagation()
+			// }, false)
+		</script>
+	</div>
+
+    </div>
+    <script src="/books/react/assets/js/highlight.js"></script>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      if (window.location.origin.match(/localhost/)) return
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f08b5240ef2d1692572ce0f7756b325e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+      var bp = document.createElement('script');
+      // push baidu.com
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+    var wrapper = document.getElementById('wrapper')
+    var floatWechat = document.getElementById('float-wechat')
+
+    function resetAll (event) {
+      var rect = wrapper.getBoundingClientRect()
+      resetFloatWechat(rect)
+    }
+    function resetFloatWechat(rect) {
+      var left = rect.left + rect.width
+      floatWechat.style.left = left + 'px'
+      floatWechat.style.display = 'block'
+    }
+    window.addEventListener('resize', resetAll)
+    resetAll()
+    </script>
+
+</body>
+
+</html>
+<link rel="stylesheet" href="http://huziketang.com/books/react/assets/css/main.css">
