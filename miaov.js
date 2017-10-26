@@ -3,7 +3,6 @@ const app = express();
 
 // 引入接口文件
 const apiRouter = require('./api/urlAPi.js');
-const testRouter = require('./api/base.js');
 const usersRouter = require('./api/userApi.js');
 
 // 连接数据库
@@ -18,8 +17,11 @@ app.get("/", (req,res) => {
 });
 
 app.use('/api',apiRouter);
-app.use('/test',testRouter);
 app.use('/user',usersRouter);
+
+// 扫描bbs社区帖子接口
+const getBBSRouter = require('./api/get-bbs-data.js');
+app.use('/bbs',getBBSRouter);
 
 app.listen(8888);
 

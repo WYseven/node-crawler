@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-let { getDataByHtml,getDataByMultiPages } = require('../lib/getDataByHtml.js');
+let { getDataByHtml,getDataByMultiPages } = require('../lib/getBBSDataByHtml.js');
 let { urlObj,urlDataModel } = require('../mongodb/schema.js');
 
 // 测试地址
@@ -16,7 +16,7 @@ let getRequestUrl = (pages) => {
 	return urls;
 }
 // 抓取指定页数的数据
-router.get("/miaovdata", (req,res) => {
+router.get("/get_bbs_data", (req,res) => {
 	let {pages} = req.query;
 
 	let urls = getRequestUrl(pages);
@@ -30,26 +30,6 @@ router.get("/miaovdata", (req,res) => {
 		})
 	})
 });
-
-// 分配给对应的人
-router.get("/allot", (req,res) => {
-	let {shareUser,id} = req.query;
-	// 通过id更新
-	let a = urlDataModel.findByIdAndUpdate(id,{allotName:shareUser});
-	a.then((data) =>{
-		res.send('ok');
-	});
-});
-
-// 标记为已回答或未回答
-/* router.get("/flag", (req,res) => {
-	let {shareUser,id} = req.query;
-	// 通过id更新
-	let a = urlDataModel.findByIdAndUpdate(id,{flagAnswer:shareUser});
-	a.then((data) =>{
-		res.send('ok');
-	});
-}); */
 
 module.exports = router;
 
