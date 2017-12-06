@@ -9,9 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.0",
     "bluebird": "^3.5.0",
+    "cheerio": "^1.0.0-rc.2",
     "express": "^4.15.4",
     "jsdom": "^11.1.0",
-    "mongoose": "^4.11.8"
+    "mongoose": "^4.11.8",
+    "request": "^2.83.0",
+    "superagent": "^3.8.1"
   }
 }
